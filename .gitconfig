@@ -1,0 +1,31 @@
+[color]
+	diff = auto
+	ui = true
+
+[user]
+	        name = Prayag Upd
+	email = prayag.upd@gmail.com
+
+
+
+[diff]
+	external = git_diff_wrapper
+
+
+[pager]
+	diff =
+
+
+
+[core]
+	filemode = false
+
+
+[alias]
+	     lp  = log --pretty=format:'%h %ad %s (%an)' --date=short
+	     ld  = git log --graph --all --decorate
+             lpd = log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short
+	out = log --pretty=oneline --abbrev-commit --graph ..@{u}
+	in = !git fetch && git log --pretty=oneline --abbrev-commit --graph @{u}..
+	git-incoming=git fetch && git log ..origin/develop --stat
+	mero-commits=log --author="PrayagUpd" --stat
