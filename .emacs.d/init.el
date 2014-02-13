@@ -59,3 +59,14 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;; add- "mero-load-path" -to-list;;;;;;;;;;;;
+;;;;;;;;;;;;;;  https://github.com/jlr/rainbow-delimiters;
+;;;;;;;;;;;;;; http://www.emacswiki.org/emacs/LoadPath;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/mero-load-path/")
+(require 'rainbow-delimiters)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+;;;;;;;;;;;;;;;;;;M-x rainbow-delimiters-mode;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
