@@ -2,6 +2,10 @@
 " mysql vim mode - https://github.com/iPrayag/vim-mysql-mode
 set nocompatible               " be iMproved
  filetype off                   " required!
+
+"-------------------------------------------
+"-----------COLORSCHEME---------------------
+"-------------------------------------------
 " option name default optional
 let g:solarized_termcolors= 16
 let g:solarized_termtrans = 16
@@ -12,8 +16,8 @@ let g:solarized_italic = 1
 let g:solarized_contrast = "high"
 let g:solarized_visibility= "high"
 
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 execute pathogen#infect()
 
 syntax enable
@@ -23,13 +27,32 @@ colorscheme solarized
 " let Vundle manage Vundle
  " required! 
  Bundle 'gmarik/vundle'
- Bundle 'bling/vim-airline'
 
- " My Bundles here:
- "
- " original repos on github
+" -------Prayag's Bundles here---------
+" -------original repos on github------
 Bundle "loki-nkl/vim-mysql-mode"
 Bundle 'phleet/vim-mercenary'
+Bundle 'bling/vim-airline'
+
+" -------------------------------------
+" ---------snipmate--------------------
+" -------------------------------------
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/vim-snippets"
+
+Bundle "garbas/vim-snipmate"
+" -------------------------------------
+
+" ---------------SCALA------------------
+" --------------------------------------
+Bundle 'derekwyatt/vim-scala'
+
+Bundle 'tomtom/tcomment_vim'
+Bundle 'tmhedberg/matchit'
+Bundle 'rdolgushin/play.vim'
+
+" --------------------------------------
 
 " non github repos
 Bundle 'git://git.wincent.com/command-t.git'
@@ -94,3 +117,7 @@ let ruby_fold=1               " Ruby
 let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
+
+filetype plugin on
+:imap <C-J> <Plug>snipMateNextOrTrigger
+:smap <C-J> <Plug>snipMateNextOrTrigger
