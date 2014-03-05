@@ -1,11 +1,14 @@
 " 'vim-mercenary'
 " mysql vim mode - https://github.com/iPrayag/vim-mysql-mode
-set nocompatible               " be iMproved
- filetype off                   " required!
 
-"-------------------------------------------
-"-----------COLORSCHEME---------------------
-"-------------------------------------------
+" kill vi compatibility
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+
+" ===============================================
+" ========== COLORSCHEME ========================
+" ===============================================
 " option name default optional
 let g:solarized_termcolors= 16
 let g:solarized_termtrans = 16
@@ -34,18 +37,20 @@ Bundle "loki-nkl/vim-mysql-mode"
 Bundle 'phleet/vim-mercenary'
 Bundle 'bling/vim-airline'
 
-" -------------------------------------
+" =====================================
 " ---------snipmate--------------------
-" -------------------------------------
+" =====================================
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/vim-snippets"
 
+" Bundle "msanders/snipmate.vim"
 Bundle "garbas/vim-snipmate"
-" -------------------------------------
+" ======================================
 
-" ---------------SCALA------------------
-" --------------------------------------
+" ======================================
+" ---------------Scala/Play=============
+" ======================================
 Bundle 'derekwyatt/vim-scala'
 
 Bundle 'tomtom/tcomment_vim'
@@ -54,12 +59,21 @@ Bundle 'rdolgushin/play.vim'
 
 " --------------------------------------
 
+" ======================================
+" ============ groovy/grails ===========
+" ======================================
+Bundle "hoffoo/vim-grails-console"
+Bundle "NathanNeff/grails-vim"
+
+
 " non github repos
 Bundle 'git://git.wincent.com/command-t.git'
  " git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
  " ...
 
+
+ filetype plugin on
  filetype plugin indent on     " required!
  "
  " Brief help
@@ -118,6 +132,6 @@ let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 
-filetype plugin on
-:imap <C-J> <Plug>snipMateNextOrTrigger
-:smap <C-J> <Plug>snipMateNextOrTrigger
+" :let g:snips_trigger_key = '<tab>'
+" :imap <C-J> <Plug>snipMateNextOrTrigger
+" :smap <C-J> <Plug>snipMateNextOrTrigger
