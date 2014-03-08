@@ -1,14 +1,12 @@
-" 'vim-mercenary'
-" mysql vim mode - https://github.com/iPrayag/vim-mysql-mode
 
 " kill vi compatibility
 set nocompatible               " be iMproved
 filetype off                   " required!
 
 
-" ===============================================
-" ========== COLORSCHEME ========================
-" ===============================================
+" =====================================================
+" ========== COLORSCHEME ==============================
+" =====================================================
 " option name default optional
 let g:solarized_termcolors= 16
 let g:solarized_termtrans = 16
@@ -18,6 +16,7 @@ let g:solarized_underline = 1
 let g:solarized_italic = 1
 let g:solarized_contrast = "high"
 let g:solarized_visibility= "high"
+" =====================================================
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -28,49 +27,57 @@ set background=dark
 colorscheme solarized
 
 " let Vundle manage Vundle
- " required! 
- Bundle 'gmarik/vundle'
+" required! 
+Bundle 'gmarik/vundle'
 
-" -------Prayag's Bundles here---------
-" -------original repos on github------
+" ===============Prayag's Bundles here=================
+" ===============original repos on github==============
 Bundle "loki-nkl/vim-mysql-mode"
 Bundle 'phleet/vim-mercenary'
 Bundle 'bling/vim-airline'
 
-" =====================================
-" ---------snipmate--------------------
-" =====================================
+" ======================================================
+" =========== snipmate =================================
+" ======================================================
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/vim-snippets"
 
 " Bundle "msanders/snipmate.vim"
 Bundle "garbas/vim-snipmate"
-" ======================================
+" ======================================================
 
-" ======================================
-" ---------------Scala/Play=============
-" ======================================
+" ======================================================
+" ===============Scala/Play=============================
+" ======================================================
 Bundle 'derekwyatt/vim-scala'
 
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'rdolgushin/play.vim'
+" ======================================================
 
-" --------------------------------------
-
-" ======================================
-" ============ groovy/grails ===========
-" ======================================
+" ======================================================
+" ============ groovy/grails ===========================
+" ======================================================
 Bundle "hoffoo/vim-grails-console"
 Bundle "NathanNeff/grails-vim"
 
+" =======================================================
+" ========== ANDROID ====================================
+Bundle 'hsanson/vim-android' " :help vim-android-commands
+Bundle 'jalcine/android.vim' " :help android-options
+" =======================================================
 
-" non github repos
+" 'vim-mercenary'
+" mysql vim mode - https://github.com/iPrayag/vim-mysql-mode
+
+" =======================================================
+" =========== non github repos ==========================
 Bundle 'git://git.wincent.com/command-t.git'
- " git repos on your local machine (ie. when working on your own plugin)
+" git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
- " ...
+" ...
 
 
  filetype plugin on
@@ -120,6 +127,7 @@ set autochdir
 
 set laststatus=2
 
+" =============================================================
 set foldmethod=syntax
 set foldlevelstart=1
 
@@ -131,6 +139,8 @@ let ruby_fold=1               " Ruby
 let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
+" =============================================================
+
 
 " :let g:snips_trigger_key = '<tab>'
 " :imap <C-J> <Plug>snipMateNextOrTrigger
