@@ -55,25 +55,26 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'rdolgushin/play.vim'
-" ======================================================
+" ========================================================
 
-" ======================================================
-" ============ groovy/grails ===========================
-" ======================================================
+" ========================================================
+" ============ groovy/grails =============================
+" ========================================================
 Bundle "hoffoo/vim-grails-console"
 Bundle "NathanNeff/grails-vim"
 
-" =======================================================
-" ========== ANDROID ====================================
-Bundle 'hsanson/vim-android' " :help vim-android-commands
+" ========================================================
+" =================== ANDROID ============================
+Bundle 'bpowell/vim-android'
+"Bundle 'hsanson/vim-android' " :help vim-android-commands
 Bundle 'jalcine/android.vim' " :help android-options
-" =======================================================
+" ========================================================
 
 " 'vim-mercenary'
 " mysql vim mode - https://github.com/iPrayag/vim-mysql-mode
 
-" =======================================================
-" =========== non github repos ==========================
+" =========================================================
+" =========== non github repos ============================
 Bundle 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
