@@ -47,6 +47,13 @@ Bundle "honza/vim-snippets"
 Bundle "garbas/vim-snipmate"
 " ======================================================
 
+
+
+" ========================================================
+" =================== git ================================
+Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
+
 " ======================================================
 " ===============Scala/Play=============================
 " ======================================================
@@ -94,7 +101,11 @@ Bundle 'git://git.wincent.com/command-t.git'
  " NOTE: comments after Bundle command are not allowed..
 
 
+" ===============================================================================
+" =============================== netRW =========================================
 " Toggle Vexplore with Ctrl-E
+" http://stackoverflow.com/a/5636941/432903
+" http://modal.us/blog/2013/07/27/back-to-vim-with-nerdtree-nope-netrw/
 function! ToggleVExplorer()
   if exists("t:expl_buf_num")
       let expl_win_num = bufwinnr(t:expl_buf_num)
@@ -125,6 +136,10 @@ let g:netrw_liststyle=3
 
 " Change directory to the current buffer when opening files.
 set autochdir
+
+" ==================================================================================
+
+
 
 set laststatus=2
 
