@@ -67,7 +67,7 @@ Bundle "NathanNeff/grails-vim"
 " =================== ANDROID ============================
 Bundle 'bpowell/vim-android'
 "Bundle 'hsanson/vim-android' " :help vim-android-commands
-Bundle 'jalcine/android.vim' " :help android-options
+Bundle 'jalcine/android.vim'
 " ========================================================
 
 " 'vim-mercenary'
