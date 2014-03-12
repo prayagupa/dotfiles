@@ -3,6 +3,13 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
+" vim IDE settings
+set number
+
+" ======================================NERDTree================
+map <C-n> :NERDTreeToggle<CR>
+" autocmd vimenter * NERDTree
+" autocmd vimenter * if !argc() | NERDTree | endif
 
 " =====================================================
 " ========== COLORSCHEME ==============================
@@ -45,7 +52,7 @@ Bundle 'bling/vim-airline'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/vim-snippets"
-
+Bundle 'kien/ctrlp.vim'
 " Bundle "msanders/snipmate.vim"
 Bundle "garbas/vim-snipmate"
 " ===============================================================
@@ -65,6 +72,8 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'rdolgushin/play.vim'
+
+Bundle 'Shadowfiend/liftweb-vim'
 " ========================================================
 
 " ========================================================
