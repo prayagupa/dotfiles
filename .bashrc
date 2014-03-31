@@ -113,9 +113,16 @@ if ! shopt -oq posix; then
   fi
 fi
 
+################# git diff ########################################################
+### put a diff_wrapper at /usr/local/bin/git_diff_wrapper #########################
+################### vimdiff "$2" "$5" #############################################
+### http://prayag-waves.blogspot.com/2012/11/git-cheat-sheet.html #################
+###################################################################################
 function git_diff() {
   git diff --no-ext-diff -w "$@" | vim -R -
-  }
+}
+###################################################################
+
 [[ $TERM != "screen" ]] && exec tmux -2
 . ~/.tmux-git/tmux-git.sh
 
