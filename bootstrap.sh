@@ -1,3 +1,8 @@
+minimalUbuntu(){
+  sudo apt-get purge thunderbird* #51.4 mb
+	sudo apt-get purge empathy
+}
+
 setupUbuntuForProgramming(){
 #chrome install
 sudo apt-get install libxss1 && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo dpkg -i google-chrome*.deb
