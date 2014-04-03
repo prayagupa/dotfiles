@@ -1,3 +1,6 @@
+#init(){
+#				#jdkInstall()
+#}
 
 32bitLibrary(){
   #echo "deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
@@ -41,6 +44,13 @@ EOF
  java -version
 }
 
+cljInstall(){
+      curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > lein
+      sudo mv lein /usr/bin/
+      sudo chmod +x /usr/bin/lein 
+      #lein repl
+}
+
 scalaInstall(){
  SCALA_VERSION="2.10.3"
  SCALA_LOCATION_SOURCE="/packup/repo.softwares/JVM/scala/scala$SCALA_VERSION.tgz"
@@ -79,7 +89,21 @@ androidInstall(){
   sudo unzip $ANDROID_STUDIO_LOCATION -d /usr/local/
   sudo chmod 777 -R /usr/local/android-studio
   echo "Android studio installed to /usr/local."
-  /usr/local/android-studio/bin/studio.sh
+cat >> /usr/local/android-studio/bin/studio64.vmoptions << 'EOF'
+	-Xms1024m
+	-Xmx1024m
+	-XX:MaxPermSize=1024m
+	-XX:ReservedCodeCacheSize=96m
+	-ea
+	-Dsun.io.useCanonCaches=false
+	-Djava.net.preferIPv4Stack=true
+	-XX:+UseCodeCacheFlushing
+	-XX:+UseConcMarkSweepGC
+	-XX:SoftRefLRUPolicyMSPerMB=50
+	-XX:+HeapDumpOnOutOfMemoryError
+	-Dawt.useSystemAAFontSettings=lcd
+EOF
+  /usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &
 }
 
 
@@ -131,5 +155,15 @@ EOF
 
 reloadProfileConf(){
  source ~/.bash_profile
+}
+
+
+configureGit(){
+#sudo touch /usr/local/bin/git_diff_wrapper
+sudo tee -a /usr/local/bin/git_diff_wrapper  >/dev/null << 'EOF'
+#!/bin/sh
+vimdiff "$2" "$5"
+EOF
+sudo chmod 777 /usr/local/bin/git_diff_wrapper
 }
 
