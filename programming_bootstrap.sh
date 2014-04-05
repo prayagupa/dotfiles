@@ -167,3 +167,6 @@ EOF
 sudo chmod 777 /usr/local/bin/git_diff_wrapper
 }
 
+installElasticsearch(){
+				sudo tar -zxvf /packup/repo.softwares/JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-1.0.0.tar.gz -C /usr/local/
+}

@@ -1,6 +1,8 @@
 minimalUbuntu(){
   sudo apt-get purge thunderbird* #51.4 mb
 	sudo apt-get purge empathy
+	sudo apt-get purge ubuntuone-client python-ubuntuone-storage*
+  sudo apt-get remove gnome-contacts
 }
 
 setupUbuntuForProgramming(){
