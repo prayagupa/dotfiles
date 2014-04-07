@@ -15,6 +15,9 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
+# autocorrect typos in pathnames(when using `cd`)
+shopt -s cdspell
+
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
@@ -89,9 +92,13 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-#################################################################
+########################################################################################################
 alias androidStudio='/usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &'
-#################################################################
+########################################################################################################
+
+# Add `killall` tab completion for common apps
+complete -o "nospace" -W "google-chrome clementine Terminal" killall
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

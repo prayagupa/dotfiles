@@ -169,4 +169,9 @@ sudo chmod 777 /usr/local/bin/git_diff_wrapper
 
 installElasticsearch(){
 				sudo tar -zxvf /packup/repo.softwares/JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-1.0.0.tar.gz -C /usr/local/
+				sudo chmod -R ugo+rw /usr/local/elasticsearch-1.0.0/
+}
+
+installMysql(){
+				sudo apt-get install mysql-server
 }
