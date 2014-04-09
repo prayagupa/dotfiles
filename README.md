@@ -5,9 +5,7 @@ install vundle dependencies
 ----------------------------
 
 ```
-$ vim
-
-:BundleInstall
+$ vim +BundleInstall +qall
 
 ```
 
