@@ -1,30 +1,36 @@
-#init(){
-#				#jdkInstall()
-#}
-
 32bitLibrary(){
   #echo "deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   sudo apt-get update
   sudo apt-get install ia32-libs
 }
 
-jdkInstall(){
+
+installJdk(){
  ####################################################################
  ################JDK#################################################
  ####################################################################
  JDK_VERSION="1.7.0"
- JDK_LOCATION_SOURCE="/packup/repo.softwares/JVM/JDK/JDK1.7.0/jdk$JDK_VERSION"
 
- JDK_LOCATION_DESTINATION="/usr/local/"
+ # Testing java installation
+ command -v java -version >/dev/null 2>&1
+ INSTALLED=$?
+ echo ""
 
- #sudo mv $JDK_LOCATION_SOURCE  $JDK_LOCATION_DESTINATION
+ # Checking java if installed
+ if [ -n "$INSTALLED" ] ; then
+    JDK_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz"
+    JDK_LOCATION_SOURCE="/packup/repo.softwares/JVM/JDK/JDK1.7.0/jdk$JDK_VERSION"
 
- ls -l $JDK_LOCATION_DESTINATION
+    JDK_LOCATION_DESTINATION="/usr/local/"
 
- sudo chmod 777 -R /usr/local/jdk1.7.0/
+    sudo mv $JDK_LOCATION_SOURCE  $JDK_LOCATION_DESTINATION
 
- #echo "JAVA_HOME=$JDK_LOCATION_DESTINATION/jdk$JDK_VERSION; export JAVA_HOME" >> ~/.bash_profile
- #echo "PATH=$JAVA_HOME/bin:$PATH; export PATH"                                >> ~/.bash_profile
+    ls -l $JDK_LOCATION_DESTINATION
+
+    sudo chmod 777 -R /usr/local/jdk1.7.0/
+
+    #echo "JAVA_HOME=$JDK_LOCATION_DESTINATION/jdk$JDK_VERSION; export JAVA_HOME" >> ~/.bash_profile
+    #echo "PATH=$JAVA_HOME/bin:$PATH; export PATH"                                >> ~/.bash_profile
 
  cat >> ~/.bash_profile <<'EOF'
   ###############################
@@ -35,13 +41,14 @@ jdkInstall(){
   export PATH=$PATH:$JAVA_HOME/bin
 EOF
 
- source ~/.bash_profile
+   source ~/.bash_profile
 
- echo "###########################################"
- echo "jdk $JDK_VERSION is installed successfully."
- echo "###########################################"
+   echo "####################################################"
+   echo "[info] : jdk $JDK_VERSION is installed successfully."
+   echo "####################################################"
 
- java -version
+   #java -version
+ fi
 }
 
 cljInstall(){
@@ -167,6 +174,13 @@ EOF
 sudo chmod 777 /usr/local/bin/git_diff_wrapper
 }
 
+installGit(){
+   sudo apt-get install vim
+   sudo apt-get install git
+
+   configureGit
+}
+
 installElasticsearch(){
 				sudo tar -zxvf /packup/repo.softwares/JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-1.0.0.tar.gz -C /usr/local/
 				sudo chmod -R ugo+rw /usr/local/elasticsearch-1.0.0/
@@ -175,3 +189,13 @@ installElasticsearch(){
 installMysql(){
 				sudo apt-get install mysql-server
 }
+
+init(){
+    installGit
+    cljInstall
+    jdkInstall
+    installElasticsearch
+    installMysql
+}
+
+#init
