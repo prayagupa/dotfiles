@@ -3,8 +3,15 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
+
 " vim IDE settings
 set number
+
+" Highlight current line
+set cursorline
+
+" 
+"set list
 
 " ======================================NERDTree================
 map <C-n> :NERDTreeToggle<CR>

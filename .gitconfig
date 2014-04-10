@@ -3,7 +3,7 @@
 	ui = true
 
 [user]
-	        name = Prayag Upd
+	name = Prayag Upd
 	email = prayag.upd@gmail.com
 
 
@@ -22,10 +22,10 @@
 
 
 [alias]
-	     lp  = log --pretty=format:'%h %ad %s (%an)' --date=short
-	     ld  = git log --graph --all --decorate
-             lpd = log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short
+	lp  = log --pretty=format:'%h %ad %s (%an)' --date=short
+	ld  = git log --graph --all --decorate
+        lpd = log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short
 	out = log --pretty=oneline --abbrev-commit --graph ..@{u}
 	in = !git fetch && git log --pretty=oneline --abbrev-commit --graph @{u}..
 	git-incoming=git fetch && git log ..origin/develop --stat
-	mero-commits=log --author="PrayagUpd" --stat
+	my-commits=log --author="PrayagUpd" --stat
