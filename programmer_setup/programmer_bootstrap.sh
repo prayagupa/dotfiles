@@ -181,6 +181,20 @@ installGit(){
    configureGit
 }
 
+configureSSH(){
+ # Testing sshd installation
+ command -v which sshd >/dev/null 2>&1
+ INSTALLED=$?
+ echo ""
+
+ # Checking sshd if installed
+ if [ -n "$INSTALLED" ] ; then
+	 echo "[INFO] : installing ssh"
+   sudo apt-get install ssh
+ fi
+}
+
+
 installElasticsearch(){
 				sudo tar -zxvf /packup/repo.softwares/JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-1.0.0.tar.gz -C /usr/local/
 				sudo chmod -R ugo+rw /usr/local/elasticsearch-1.0.0/
