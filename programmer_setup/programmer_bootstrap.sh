@@ -204,6 +204,33 @@ installMysql(){
 				sudo apt-get install mysql-server
 }
 
+# https://github.com/nathanmarz/storm/wiki/Setting-up-development-environment
+
+installStorm(){
+	STORM_VERSION=0.8.2
+	SOURCE="storm-$STORM_VERSION"
+	DESTINATION="/usr/local"
+	#wget https://dl.dropboxusercontent.com/s/fl4kr7w0oc8ihdw/storm-0.8.2.zip?dl=1&token_hash=AAEAQiAKkgRc2Y2YI7zmIBOWe06neX5APneao4hUzO2bEQ
+	
+	sudo unzip $SOURCE.zip -d $DESTINATION
+	sudo chmod 777 -R $DESTINATION/$SOURCE
+cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### STORM ###############
+  ###############################
+  STORM_HOME=/usr/local/storm-0.8.2
+  export STORM_HOME
+  export PATH=$PATH:$STORM_HOME/bin
+EOF
+
+   reloadProfileConf
+
+   echo "####################################################"
+   echo "[info] : $STORM_VERSION is installed successfully."
+   echo "####################################################"
+
+}
+
 init(){
     installGit
     cljInstall
