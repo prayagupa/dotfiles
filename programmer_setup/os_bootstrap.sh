@@ -59,3 +59,9 @@ alsaReload(){
    sudo apt-get install alsa-base pulseaudio
    sudo alsa force-reload
 }
+
+installSkype(){
+				sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+				sudo apt-get update 
+				sudo apt-get install skype
+}

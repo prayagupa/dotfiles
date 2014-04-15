@@ -204,6 +204,7 @@ installMysql(){
 				sudo apt-get install mysql-server
 }
 
+
 # https://github.com/nathanmarz/storm/wiki/Setting-up-development-environment
 
 installStorm(){
@@ -228,7 +229,46 @@ EOF
    echo "####################################################"
    echo "[info] : $STORM_VERSION is installed successfully."
    echo "####################################################"
+}
 
+
+installHipchat(){
+sudo su
+echo "deb http://downloads.hipchat.com/linux/apt stable main" > \
+				  /etc/apt/sources.list.d/atlassian-hipchat.list
+wget -O - https://www.hipchat.com/keys/hipchat-linux.key | apt-key add -
+apt-get update
+apt-get install hipchat
+}
+
+installAdobeAir(){
+				#wget http://airdownload.adobe.com/air/lin/download/2.6/AdobeAIRInstaller.bin
+				sudo chmod a+x /packup/repo.softwares/linux/adobeair2.6/AdobeAIRInstaller.bin && sudo /packup/repo.softwares/linux/adobeair2.6/AdobeAIRInstaller.bin
+}
+
+installAdobeAir26(){
+				sudo apt-get install libxt6:i386 libnspr4-0d:i386 libgtk2.0-0:i386 libstdc++6:i386 libnss3-1d:i386 lib32nss-mdns libxml2:i386 libxslt1.1:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386
+				sudo apt-get install libgnome-keyring0:i386
+				cd /tmp
+				sudo apt-get download libgnome-keyring0:i386
+				sudo dpkg-deb -R libgnome-keyring0_3.6.0-1_i386.deb gnome-keyring ##verify version
+				sudo cp gnome-keyring/usr/lib/i386-linux-gnu/libgnome-keyring.so.0.2.0 /usr/lib/i386-linux-gnu/
+				sudo ln -s /usr/lib/i386-linux-gnu/libgnome-keyring.so.0.2.0 /usr/lib/i386-linux-gnu/libgnome-keyring.so.0
+				sudo ln -s /usr/lib/i386-linux-gnu/libgnome-keyring.so.0 /usr/lib/libgnome-keyring.so.0
+				sudo ln -s /usr/lib/i386-linux-gnu/libgnome-keyring.so.0.2.0 /usr/lib/libgnome-keyring.so.0.2.0
+
+				installAdobeAir
+
+				sudo rm /usr/lib/libgnome-keyring.so.0
+				sudo rm /usr/lib/libgnome-keyring.so.0.2.0
+}
+
+##
+## @see : http://www.tkalin.com/blog_posts/installing-adobe-air-and-elance-tracker-on-ubuntu-13-10-saucy-salamander-64-bit
+##
+installElanceTracker(){
+				installAdobeAir26
+				sudo dpkg -i /packup/repo.softwares/linux/TrackerSetup.deb
 }
 
 init(){
