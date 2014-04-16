@@ -1,3 +1,7 @@
+
+DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
+DEFAULT_INSTALLATION_DEST="/usr/local/"
+
 32bitLibrary(){
   #echo "deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   sudo apt-get update
@@ -51,7 +55,7 @@ EOF
  fi
 }
 
-cljInstall(){
+installClj(){
       curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > lein
       sudo mv lein /usr/bin/
       sudo chmod +x /usr/bin/lein 
@@ -64,7 +68,7 @@ scalaInstall(){
  
  SCALA_LOCATION_DESTINATION="/usr/local/"
  
- sudo tar -zxvf $SCALA_LOCATION_SOURCE -d $SCALA_LOCATION_DESTINATION
+ sudo tar -zxvf $SCALA_LOCATION_SOURCE -C $SCALA_LOCATION_DESTINATION
  #sudo mv $SCALA_LOCATION_SOURCE  $SCALA_LOCATION_DESTINATION
 
  ls -l $SCALA_LOCATION_DESTINATION
@@ -75,17 +79,70 @@ scalaInstall(){
   ###############################
   ########### SCALA #############
   ###############################
-  JAVA_HOME=/usr/local/scala-2.10.3
-  export JAVA_HOME
-  export PATH=$PATH:$JAVA_HOME/bin
+  SCALA_HOME=/usr/local/scala-2.10.3
+  export SCALA_HOME
+  export PATH=$PATH:$SCALA_HOME/bin
 EOF
 
  source ~/.bash_profile
 
- echo "###########################################"
- echo "jdk $SCALA_VERSION is installed successfully."
- echo "###########################################"
+ echo "##################################################"
+ echo "[info] : $SCALA_VERSION is installed successfully."
+ echo "##################################################"
 
+}
+
+
+installGrails(){
+ GRAILS_VERSION="2.2.3"
+ GRAILS_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT/JVM/GroovyOnGrails/grails-$GRAILS_VERSION.zip"
+ 
+ sudo unzip $GRAILS_LOCATION_SOURCE -d $DEFAULT_INSTALLATION_DEST
+ sudo chmod 777 -R /usr/local/grails-$GRAILS_VERSION
+
+# cat >> ~/.bash_profile <<'EOF'
+#  ###############################
+#  ########### grails #############
+#  ###############################
+#  JAVA_HOME=/usr/local/grails-2.2.3
+#  export GRAILS_HOME
+#  export PATH=$PATH:$GRAILS_HOME/bin
+#EOF
+
+ reloadProfileConf
+
+ echo "####################################################"
+ echo "[info] : $GRAILS_VERSION is installed successfully."
+ echo "####################################################"
+
+}
+
+installIntelliJ(){
+  SOURCE_LOCATION="/packup/repo.softwares/JVM/IDEs/idea/ideaIU-13.tar.gz"
+	DEST_LOCATION="/usr/local"
+	DEST_FOLDER="idea-IU-133.193"
+  sudo tar -zxvf $SOURCE_LOCATION -C $DEST_LOCATION/
+  sudo chmod 777 -R $DEST_LOCATION/$DEST_FOLDER
+  
+	echo " ####################################################################"
+  echo " [info] : Intellij is installed to /usr/local."
+	echo " ####################################################################"
+
+sudo tee -a $DEST_LOCATION/$DEST_FOLDER/bin/studio64.vmoptions >/dev/null << 'EOF'
+	cat >> << 'EOF'
+	-Xms1024m
+	-Xmx1024m
+	-XX:MaxPermSize=1024m
+	-XX:ReservedCodeCacheSize=96m
+	-ea
+	-Dsun.io.useCanonCaches=false
+	-Djava.net.preferIPv4Stack=true
+	-XX:+UseCodeCacheFlushing
+	-XX:+UseConcMarkSweepGC
+	-XX:SoftRefLRUPolicyMSPerMB=50
+	-XX:+HeapDumpOnOutOfMemoryError
+	-Dawt.useSystemAAFontSettings=lcd
+EOF
 }
 
 #################################################################################################
@@ -110,7 +167,7 @@ cat >> /usr/local/android-studio/bin/studio64.vmoptions << 'EOF'
 	-XX:+HeapDumpOnOutOfMemoryError
 	-Dawt.useSystemAAFontSettings=lcd
 EOF
-  /usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &
+  #/usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &
 }
 
 
@@ -271,10 +328,19 @@ installElanceTracker(){
 				sudo dpkg -i /packup/repo.softwares/linux/TrackerSetup.deb
 }
 
+
+## http://www.mongodb.org/downloads
+
+##TODO
+installMongodb(){
+   wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.0.tgz
+}
+
 init(){
     installGit
-    cljInstall
-    jdkInstall
+    installClj
+    installJdk
+		installGrails
     installElasticsearch
     installMysql
 }
