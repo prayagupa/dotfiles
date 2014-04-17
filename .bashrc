@@ -119,7 +119,7 @@ for util in ~/programmer_setup/{os_bootstrap.sh,programmer_bootstrap.sh,utilitie
 done
 unset util
 
-for file in ~/.{bash_prompt}; do
+for file in ~/.bash_prompt; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file
