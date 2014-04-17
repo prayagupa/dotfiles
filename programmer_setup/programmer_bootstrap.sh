@@ -1,7 +1,30 @@
 ##for 64 bit
 
 DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
+DEFAULT_SOURCE_ROOT_JVM="/packup/repo.softwares/JVM"
 DEFAULT_INSTALLATION_DEST="/usr/local/"
+
+##global functions
+
+reloadProfileConf(){
+ source ~/.bash_profile
+}
+
+setPermission777(){
+				sudo chmod -R 777 $1
+
+}
+
+setPermission(){
+				sudo chmod -R ugo+rw $1
+
+}
+
+showMessage(){
+ echo "##################################################"
+ echo "[info] : $1 $2 is installed successfully."
+ echo "##################################################"
+}
 
 install32bitLibrary(){
   #echo "deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
@@ -9,11 +32,10 @@ install32bitLibrary(){
   sudo apt-get install ia32-libs
 }
 
-
+####################################################################
+################JDK#################################################
+####################################################################
 installJdk(){
- ####################################################################
- ################JDK#################################################
- ####################################################################
  JDK_VERSION="1.7.0"
 
  # Testing java installation
@@ -27,10 +49,7 @@ installJdk(){
     JDK_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT/JVM/JDK/JDK1.7.0/jdk$JDK_VERSION"
 
     sudo mv $JDK_LOCATION_SOURCE  $DEFAULT_INSTALLATION_DEST
-    sudo chmod 777 -R /usr/local/jdk1.7.0/
-
-    #echo "JAVA_HOME=$JDK_LOCATION_DESTINATION/jdk$JDK_VERSION; export JAVA_HOME" >> ~/.bash_profile
-    #echo "PATH=$JAVA_HOME/bin:$PATH; export PATH"                                >> ~/.bash_profile
+    sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/jdk1.7.0/
 
  cat >> ~/.bash_profile <<'EOF'
   ###############################
@@ -46,8 +65,6 @@ EOF
    echo "####################################################"
    echo "[info] : jdk $JDK_VERSION is installed successfully."
    echo "####################################################"
-
-   #java -version
  fi
 }
 
@@ -63,7 +80,6 @@ installScala(){
  SCALA_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT/JVM/scala/scala$SCALA_VERSION.tgz"
  
  sudo tar -zxvf $SCALA_LOCATION_SOURCE -C $DEFAULT_INSTALLATION_DEST
-
  sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/scala-$SCALA_VERSION
 
  cat >> ~/.bash_profile <<'EOF'
@@ -75,7 +91,7 @@ installScala(){
   export PATH=$PATH:$SCALA_HOME/bin
 EOF
 
- source ~/.bash_profile
+ reloadProfileConf
 
  echo "##################################################"
  echo "[info] : $SCALA_VERSION is installed successfully."
@@ -84,9 +100,28 @@ EOF
 }
 
 
+installPlayFramework(){
+				PLAY_VERSION="2.2.2"
+				PLAY_URL="http://downloads.typesafe.com/play/$PLAY_VERSION/play-$PLAY_VERSION.zip"
+				wget $PLAY_URL  -P $DEFAULT_SOURCE_ROOT_JVM/scala/
+				sudo unzip  $DEFAULT_SOURCE_ROOT_JVM/scala/play-$PLAY_VERSION -d $DEFAULT_INSTALLATION_DEST
+        setPermission777 $DEFAULT_INSTALLATION_DEST/play-$PLAY_VERSION
+ cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### play #############
+  ###############################
+  PLAY_HOME=/usr/local/play-2.2.2
+  export PLAY_HOME
+  export PATH=$PATH:$PLAY_HOME/bin
+EOF
+
+ reloadProfileConf
+ showMessage "play" $PLAY_VERSION
+}
+
 installGrails(){
  GRAILS_VERSION="2.2.3"
- GRAILS_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT/JVM/GroovyOnGrails/grails-$GRAILS_VERSION.zip"
+ GRAILS_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT_JVM/GroovyOnGrails/grails-$GRAILS_VERSION.zip"
  
  sudo unzip $GRAILS_LOCATION_SOURCE -d $DEFAULT_INSTALLATION_DEST
  sudo chmod 777 -R /usr/local/grails-$GRAILS_VERSION
@@ -209,9 +244,6 @@ EOF
  echo "######################################"
 }
 
-reloadProfileConf(){
- source ~/.bash_profile
-}
 
 
 configureGit(){
@@ -245,8 +277,9 @@ configureSSH(){
 
 
 installElasticsearch(){
-				sudo tar -zxvf $DEFAULT_SOURCE_ROOT/JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-1.0.0.tar.gz -C /usr/local/
-				sudo chmod -R ugo+rw $DEFAULT_INSTALLATION_DEST/elasticsearch-1.0.0/
+				VERSION_ES="1.1.0"
+				sudo tar -zxvf $DEFAULT_SOURCE_ROOT_JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-$VERSION_ES.tar.gz -C $DEFAULT_INSTALLATION_DEST
+				sudo chmod -R ugo+rw $DEFAULT_INSTALLATION_DEST/elasticsearch-$VERSION_ES/
 }
 
 installMysql(){
