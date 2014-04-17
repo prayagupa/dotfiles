@@ -1,15 +1,15 @@
 prayagupd's dotfiles
 ------------------------
 
-install vundle dependencies
+install
 ----------------------------
 
 ```
-$ vim +BundleInstall +qall
+$ bash dotfiles_bootstrap.sh
 
 ```
 
-what it looks like
+what terminal looks like
 ------------------------
 ![solarized dark](https://github.com/iPrayag/dotfiles/raw/master/dotfiles_prayag.png)
 
