@@ -35,6 +35,7 @@ EOF
 
 askForGitconfigUser(){
    ##TODO
+   echo ""
 }
 
 installVundleDeps(){
