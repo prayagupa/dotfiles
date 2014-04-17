@@ -1,8 +1,9 @@
+##for 64 bit
 
 DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
 DEFAULT_INSTALLATION_DEST="/usr/local/"
 
-32bitLibrary(){
+install32bitLibrary(){
   #echo "deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   sudo apt-get update
   sudo apt-get install ia32-libs
@@ -23,14 +24,9 @@ installJdk(){
  # Checking java if installed
  if [ -n "$INSTALLED" ] ; then
     JDK_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz"
-    JDK_LOCATION_SOURCE="/packup/repo.softwares/JVM/JDK/JDK1.7.0/jdk$JDK_VERSION"
+    JDK_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT/JVM/JDK/JDK1.7.0/jdk$JDK_VERSION"
 
-    JDK_LOCATION_DESTINATION="/usr/local/"
-
-    sudo mv $JDK_LOCATION_SOURCE  $JDK_LOCATION_DESTINATION
-
-    ls -l $JDK_LOCATION_DESTINATION
-
+    sudo mv $JDK_LOCATION_SOURCE  $DEFAULT_INSTALLATION_DEST
     sudo chmod 777 -R /usr/local/jdk1.7.0/
 
     #echo "JAVA_HOME=$JDK_LOCATION_DESTINATION/jdk$JDK_VERSION; export JAVA_HOME" >> ~/.bash_profile
@@ -62,18 +58,13 @@ installClj(){
       #lein repl
 }
 
-scalaInstall(){
+installScala(){
  SCALA_VERSION="2.10.3"
- SCALA_LOCATION_SOURCE="/packup/repo.softwares/JVM/scala/scala$SCALA_VERSION.tgz"
+ SCALA_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT/JVM/scala/scala$SCALA_VERSION.tgz"
  
- SCALA_LOCATION_DESTINATION="/usr/local/"
- 
- sudo tar -zxvf $SCALA_LOCATION_SOURCE -C $SCALA_LOCATION_DESTINATION
- #sudo mv $SCALA_LOCATION_SOURCE  $SCALA_LOCATION_DESTINATION
+ sudo tar -zxvf $SCALA_LOCATION_SOURCE -C $DEFAULT_INSTALLATION_DEST
 
- ls -l $SCALA_LOCATION_DESTINATION
-
- sudo chmod 777 -R /usr/local/scala-$SCALA_VERSION
+ sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/scala-$SCALA_VERSION
 
  cat >> ~/.bash_profile <<'EOF'
   ###############################
@@ -118,17 +109,18 @@ installGrails(){
 }
 
 installIntelliJ(){
-  SOURCE_LOCATION="/packup/repo.softwares/JVM/IDEs/idea/ideaIU-13.tar.gz"
-	DEST_LOCATION="/usr/local"
-	DEST_FOLDER="idea-IU-133.193"
-  sudo tar -zxvf $SOURCE_LOCATION -C $DEST_LOCATION/
-  sudo chmod 777 -R $DEST_LOCATION/$DEST_FOLDER
-  
-	echo " ####################################################################"
-  echo " [info] : Intellij is installed to /usr/local."
-	echo " ####################################################################"
 
-sudo tee -a $DEST_LOCATION/$DEST_FOLDER/bin/studio64.vmoptions >/dev/null << 'EOF'
+  SOURCE_LOCATION="$DEFAULT_SOURCE_ROOT/JVM/IDEs/idea/ideaIU-13.tar.gz"
+  DEST_FOLDER="idea-IU-133.193"
+
+  sudo tar -zxvf $SOURCE_LOCATION -C $DEFAULT_INSTALLATION_DEST
+  sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$DEST_FOLDER
+  
+  echo " ####################################################################"
+  echo " [info] : Intellij is installed to $DEFAULT_INSTALLATION_DEST."
+  echo " ####################################################################"
+
+sudo tee -a $DEFAULT_INSTALLATION_DEST/$DEST_FOLDER/bin/studio64.vmoptions >/dev/null << 'EOF'
 	cat >> << 'EOF'
 	-Xms1024m
 	-Xmx1024m
@@ -150,8 +142,8 @@ EOF
 #################################################################################################
 androidInstall(){
   ANDROID_STUDIO_LOCATION="/media/prayagupd/Elements/_backup/backup/android-studio-prayag.zip"
-  sudo unzip $ANDROID_STUDIO_LOCATION -d /usr/local/
-  sudo chmod 777 -R /usr/local/android-studio
+  sudo unzip $ANDROID_STUDIO_LOCATION -d $DEFAULT_INSTALLATION_DEST
+  sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/android-studio
   echo "Android studio installed to /usr/local."
 cat >> /usr/local/android-studio/bin/studio64.vmoptions << 'EOF'
 	-Xms1024m
@@ -253,8 +245,8 @@ configureSSH(){
 
 
 installElasticsearch(){
-				sudo tar -zxvf /packup/repo.softwares/JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-1.0.0.tar.gz -C /usr/local/
-				sudo chmod -R ugo+rw /usr/local/elasticsearch-1.0.0/
+				sudo tar -zxvf $DEFAULT_SOURCE_ROOT/JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-1.0.0.tar.gz -C /usr/local/
+				sudo chmod -R ugo+rw $DEFAULT_INSTALLATION_DEST/elasticsearch-1.0.0/
 }
 
 installMysql(){

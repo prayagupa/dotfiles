@@ -34,8 +34,18 @@ EOF
 }
 
 askForGitconfigUser(){
-   ##TODO
-   echo ""
+
+   echo -n "git username (eg. iPrayag): "
+   read username
+
+   echo -n "git email (eg. prayag.upd@gmail.com) : "
+   read email
+
+cat >> ~/.gitconfig <<EOF 
+   [user]
+	name  = $username
+	email = $email
+EOF
 }
 
 installVundleDeps(){
