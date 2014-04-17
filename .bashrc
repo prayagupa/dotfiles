@@ -112,6 +112,18 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+##programmer setup
+
+for util in ~/programmer_setup/{os_bootstrap.sh,programmer_bootstrap.sh,utilities.sh}; do
+	[ -r "$util" ] && [ -f "$util" ] && source "$util"
+done
+unset util
+
+for file in ~/.{bash_prompt}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -133,7 +145,7 @@ function git_diff() {
 }
 ###################################################################
 
-[[ $TERM != "screen" ]] && exec tmux -2
-. ~/.tmux-git/tmux-git.sh
+#[[ $TERM != "screen" ]] && exec tmux -2
+#. ~/.tmux-git/tmux-git.sh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
