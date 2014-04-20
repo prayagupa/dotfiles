@@ -1,6 +1,12 @@
 configureMP3Codecs(){
   sudo apt-get install ffmpeg libavcodec-extra-53
 }
+
+convertToMP3(){
+  sudo apt-get install ffmpeg libavcodec-extra-53 libav-tools
+  avconv -i $1 $2
+}
+
 convertMP4toMP3(){
   configureMP3Codecs
 	#echo -n "Enter source mp4 file : "

@@ -4,14 +4,14 @@
 
 ##BACKUP
 
-backup="~/backup"
+backup="$HOME/dotfiles_backup"
 backupDotfiles(){
- mkdir $backup
- mv ~/.vim $backup
- mv ~/.vimrc $backup
- mv ~/.bashrc $backup
- mv ~/.gitconfig $backup
- mv ~/.bash_profile $backup
+ mkdir "$backup"
+ mv ~/.vim "$backup"
+ mv ~/.vimrc "$backup"
+ mv ~/.bashrc "$backup"
+ mv ~/.gitconfig "$backup"
+ mv ~/.bash_profile "$backup"
 }
 
 installDotfiles(){
@@ -22,6 +22,8 @@ installDotfiles(){
  cp .gitconfig ~/
  cp .tmux.conf ~/
  cp .bash_aliases ~/
+
+ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && git clone https://github.com/altercation/vim-colors-solarized ~/.vim/bundle/vim-colors-solarized
 }
 
 configureGitDiff(){
@@ -59,7 +61,7 @@ init(){
  configureGitDiff
  installVundleDeps
  gconftool --type string --set /desktop/gnome/background/primary_color "#002b36"
- echo "#####################################$$$$$$#######"
+ echo "##################################################"
  echo "#####[info] : dotfiles installed \,,/#############"
  echo "##################################################"
 }

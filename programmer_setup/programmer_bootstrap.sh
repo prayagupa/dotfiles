@@ -112,7 +112,7 @@ installPlayFramework(){
   ###############################
   PLAY_HOME=/usr/local/play-2.2.2
   export PLAY_HOME
-  export PATH=$PATH:$PLAY_HOME/bin
+  export PATH=$PATH:$PLAY_HOME/
 EOF
 
  reloadProfileConf
@@ -354,11 +354,48 @@ installElanceTracker(){
 }
 
 
-## http://www.mongodb.org/downloads
+tarIt(){
+   sudo tar -zxvf $1  -C $DEFAULT_INSTALLATION_DEST
+}
 
-##TODO
+## http://www.mongodb.org/downloads
+## http://prayag-waves.blogspot.com/2012/11/hacking-on-grails-and-mongodb.html
+## http://docs.mongodb.org/manual/tutorial/install-mongodb-on-linux/
+
 installMongodb(){
-   wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.0.tgz
+   MONGO_VERSION="2.6.0"
+   MONGO_FILE="mongodb-linux-x86_64-$MONGO_VERSION.tgz"
+   #wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.0.tgz
+   tarIt $DEFAULT_SOURCE_ROOT/$MONGO_FILE
+cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### MONGO #############
+  ###############################
+  MONGODB_HOME=/usr/local/mongodb-linux-x86_64-2.6.0
+  export MONGODB_HOME
+  export PATH=$PATH:$MONGODB_HOME/bin
+EOF
+
+DB_PATH="/data/db"
+sudo mkdir -p $DB_PATH
+setPermission $DB_PATH
+
+   #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+   #echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+   #sudo apt-get update
+   #sudo apt-get install mongodb-org
+   #sudo apt-get install mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1 mongodb-org-tools=2.6.1
+}
+
+installErlang(){
+    sudo apt-get update && sudo apt-get install erlang 
+}
+
+installRabbitMQ(){
+      
+      wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.2.4/rabbitmq-server-generic-unix-3.2.4.tar.gz && tar -zxvf rabbitmq-server-generic-unix-3.2.4.tar.gz 
+
+cd rabbitmq_server-3.2.4 && sbin/rabbitmq-server
 }
 
 init(){
