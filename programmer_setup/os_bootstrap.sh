@@ -65,3 +65,31 @@ installSkype(){
 				sudo apt-get update 
 				sudo apt-get install skype
 }
+
+##http://askubuntu.com/a/224800/37643
+##Rhythmbox requires to install plugins to play media files of the following type: text/html decoder
+##
+installMediaLibs(){
+	sudo apt-get install libcdaudio1 libflite1 libgme0 libgstreamer-plugins-bad0.10-0 libmimic0 libofa0 libslv2-9 libspandsp2 libvo-aacenc0 libvo-amrwbenc0 libwildmidi-config libwildmidi1 libzbar0 gstreamer0.10-plugins-bad 
+}
+
+#didnt work for rhythmbox 2.8
+installRhythmboxPlugins(){
+	rm -rf ~/.local/share/rhythmbox/plugins/coverart_browser
+	git clone https://github.com/fossfreedom/coverart-browser.git
+	cd coverart-browser
+	./install.sh
+}
+
+installRhythmbox3(){
+	sudo add-apt-repository ppa:jacob/media
+	sudo apt-get update
+	sudo apt-get install rhythmbox
+}
+
+#http://code.google.com/p/tab-rhythmbox-plugin/wiki/Installation
+installRhythmboxGuitarPlugin(){
+	wget http://tab-rhythmbox-plugin.googlecode.com/svn/trunk/svn_install.sh
+	sudo chmod +x svn_install.sh
+	sudo ./svn_install.sh
+}
