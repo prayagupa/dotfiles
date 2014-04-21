@@ -4,10 +4,16 @@ DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
 DEFAULT_SOURCE_ROOT_JVM="/packup/repo.softwares/JVM"
 DEFAULT_INSTALLATION_DEST="/usr/local/"
 
+#########################################################################
 ##global functions
+#########################################################################
 
 reloadProfileConf(){
  source ~/.bash_profile
+}
+
+unzipIt(){
+	sudo unzip $1 -d $DEFAULT_INSTALLATION_DEST
 }
 
 setPermission777(){
@@ -17,7 +23,6 @@ setPermission777(){
 
 setPermission(){
 				sudo chmod -R ugo+rw $1
-
 }
 
 showMessage(){
@@ -25,6 +30,7 @@ showMessage(){
  echo "[info] : $1 $2 is installed successfully."
  echo "##################################################"
 }
+#########################################################################
 
 install32bitLibrary(){
   #echo "deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
@@ -120,11 +126,11 @@ EOF
 }
 
 installGrails(){
- GRAILS_VERSION="2.2.3"
- GRAILS_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT_JVM/GroovyOnGrails/grails-$GRAILS_VERSION.zip"
- 
- sudo unzip $GRAILS_LOCATION_SOURCE -d $DEFAULT_INSTALLATION_DEST
- sudo chmod 777 -R /usr/local/grails-$GRAILS_VERSION
+ TOOL="grails"
+ GRAILS_VERSION="2.3.3"
+ GRAILS_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT_JVM/GroovyOnGrails/$TOOL-$GRAILS_VERSION.zip"
+ unzipIt $GRAILS_LOCATION_SOURCE
+ setPermission777 $DEFAULT_INSTALLATION_DEST/$TOOL-$GRAILS_VERSION
 
 # cat >> ~/.bash_profile <<'EOF'
 #  ###############################
@@ -136,11 +142,7 @@ installGrails(){
 #EOF
 
  reloadProfileConf
-
- echo "####################################################"
- echo "[info] : $GRAILS_VERSION is installed successfully."
- echo "####################################################"
-
+ showMessage $TOOL $GRAILS_VERSION
 }
 
 installIntelliJ(){
@@ -245,6 +247,9 @@ EOF
 }
 
 
+installSvn(){
+	sudo apt-get install subversion
+}
 
 configureGit(){
 #sudo touch /usr/local/bin/git_diff_wrapper
@@ -292,11 +297,10 @@ installMysql(){
 installStorm(){
 	STORM_VERSION=0.8.2
 	SOURCE="storm-$STORM_VERSION"
-	DESTINATION="/usr/local"
 	#wget https://dl.dropboxusercontent.com/s/fl4kr7w0oc8ihdw/storm-0.8.2.zip?dl=1&token_hash=AAEAQiAKkgRc2Y2YI7zmIBOWe06neX5APneao4hUzO2bEQ
 	
-	sudo unzip $SOURCE.zip -d $DESTINATION
-	sudo chmod 777 -R $DESTINATION/$SOURCE
+	sudo unzip $SOURCE.zip -d $DEFAULT_INSTALLATION_DEST
+	sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$SOURCE
 cat >> ~/.bash_profile <<'EOF'
   ###############################
   ########### STORM ###############
@@ -309,7 +313,7 @@ EOF
    reloadProfileConf
 
    echo "####################################################"
-   echo "[info] : $STORM_VERSION is installed successfully."
+   echo "[info] : storm $STORM_VERSION is installed successfully."
    echo "####################################################"
 }
 
@@ -385,6 +389,25 @@ setPermission $DB_PATH
    #sudo apt-get update
    #sudo apt-get install mongodb-org
    #sudo apt-get install mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1 mongodb-org-tools=2.6.1
+}
+
+installDatomic(){
+	DATOMIC_VERSION="0.9.4724"
+	DATOMIC_FILE="datomic-free-$DATOMIC_VERSION"
+	DOWNLOAD_URL="https://my.datomic.com/downloads/free/$DATOMIC_VERSION"
+	#wget doesn't work
+	#wget $DOWNLOAD_URL -P $DEFAULT_SOURCE_ROOT
+	unzipIt $DEFAULT_SOURCE_ROOT/$DATOMIC_FILE.zip
+	setPermission $DEFAULT_INSTALLATION_DEST/$DATOMIC_FILE
+cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### DATOMIC ###########
+  ###############################
+  DATOMIC_HOME=/usr/local/datomic-free-0.9.4724
+  export DATOMIC_HOME
+  export PATH=$PATH:$DATOMIC_HOME/bin
+EOF
+ reloadProfileConf
 }
 
 installErlang(){
