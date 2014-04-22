@@ -414,6 +414,30 @@ installErlang(){
     sudo apt-get update && sudo apt-get install erlang 
 }
 
+installNeo4j(){
+	NEO4J_VERSION="2.0.2"
+	NEO4J_FILE="neo4j-community-$NEO4J_VERSION"
+	NEO4J_FILE_TAR="$NEO4J_FILE-unix.tar.gz"
+	DOWNLOAD_URL="http://download.neo4j.org/artifact?edition=community&version=2.0.2&distribution=tarball&dlid=4058193"
+	#
+	#wget $DOWNLOAD_URL -P $DEFAULT_SOURCE_ROOT
+	tarIt $DEFAULT_SOURCE_ROOT/neo4j-community-2.0.2-unix.tar.gz
+	setPermission $DEFAULT_INSTALLATION_DEST/neo4j-community-2.0.2
+cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### NEO4J ###########
+  ###############################
+  NEO4J_HOME=/usr/local/neo4j-community-2.0.2
+  export NEO4J_HOME
+  export PATH=$PATH:$NEO4J_HOME/bin
+EOF
+ reloadProfileConf
+}
+
+installErlang(){
+    sudo apt-get update && sudo apt-get install erlang 
+}
+
 installRabbitMQ(){
       
       wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.2.4/rabbitmq-server-generic-unix-3.2.4.tar.gz && tar -zxvf rabbitmq-server-generic-unix-3.2.4.tar.gz 
