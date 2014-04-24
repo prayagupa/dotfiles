@@ -1,6 +1,22 @@
 [color]
-	diff = auto
+	#diff = auto
 	ui = true
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
 
 #[user]
 #	name = Prayag Upd

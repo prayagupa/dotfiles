@@ -22,6 +22,9 @@ alias gPullMaster='git pull origin master -v'
 alias gPullDevelop='git pull origin develop -v'
 
 alias gDiff='git diff'
+alias gCheckout='git checkout'
+
+alias glpd="git log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short"
 
 ########################################################################################
 #########################
@@ -31,3 +34,4 @@ alias gDiff='git diff'
 
 alias goMakalu='cd ~/backup/makaluSeries/makalu_develop/DasTest && git status'
 alias androidStudioStart='/usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &'
+alias enoughCoding='sudo shutdown -h now'
