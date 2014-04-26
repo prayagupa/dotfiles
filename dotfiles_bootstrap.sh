@@ -26,6 +26,8 @@ installDotfiles(){
 
  cp -r .emacs.d ~/
 
+ cp -r .lein ~/
+
  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && git clone https://github.com/altercation/vim-colors-solarized ~/.vim/bundle/vim-colors-solarized
 
  git clone https://github.com/sellout/emacs-color-theme-solarized.git ~/.emacs.d/emacs-color-theme-solarized
