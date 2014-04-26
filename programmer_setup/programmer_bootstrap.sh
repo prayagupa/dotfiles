@@ -283,8 +283,10 @@ configureSSH(){
 
 installElasticsearch(){
 				VERSION_ES="1.1.0"
+				ES_HOME=$DEFAULT_INSTLLATION_DEST/elasticsearch-$ES_VERSION
 				sudo tar -zxvf $DEFAULT_SOURCE_ROOT_JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-$VERSION_ES.tar.gz -C $DEFAULT_INSTALLATION_DEST
-				sudo chmod -R ugo+rw $DEFAULT_INSTALLATION_DEST/elasticsearch-$VERSION_ES/
+				sudo chmod -R ugo+rw $ES_HOME
+          	                $ES_HOME/bin/plugin -i elasticsearch/marvel/latest
 }
 
 installMysql(){
@@ -415,19 +417,18 @@ installErlang(){
 }
 
 installNeo4j(){
-	NEO4J_VERSION="2.0.2"
+	NEO4J_VERSION="1.9.7"
 	NEO4J_FILE="neo4j-community-$NEO4J_VERSION"
 	NEO4J_FILE_TAR="$NEO4J_FILE-unix.tar.gz"
-	DOWNLOAD_URL="http://download.neo4j.org/artifact?edition=community&version=2.0.2&distribution=tarball&dlid=4058193"
-	#
+	DOWNLOAD_URL_="http://dist.neo4j.org/neo4j-community-1.9.7-unix.tar.gz"
 	#wget $DOWNLOAD_URL -P $DEFAULT_SOURCE_ROOT
-	tarIt $DEFAULT_SOURCE_ROOT/neo4j-community-2.0.2-unix.tar.gz
-	setPermission $DEFAULT_INSTALLATION_DEST/neo4j-community-2.0.2
+	tarIt $DEFAULT_SOURCE_ROOT/$NEO4J_FILE_TAR
+	setPermission $DEFAULT_INSTALLATION_DEST/$NEO4J_FILE
 cat >> ~/.bash_profile <<'EOF'
   ###############################
   ########### NEO4J ###########
   ###############################
-  NEO4J_HOME=/usr/local/neo4j-community-2.0.2
+  NEO4J_HOME=/usr/local/neo4j-community-1.9.7
   export NEO4J_HOME
   export PATH=$PATH:$NEO4J_HOME/bin
 EOF
@@ -443,6 +444,11 @@ installRabbitMQ(){
       wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.2.4/rabbitmq-server-generic-unix-3.2.4.tar.gz && tar -zxvf rabbitmq-server-generic-unix-3.2.4.tar.gz 
 
 cd rabbitmq_server-3.2.4 && sbin/rabbitmq-server
+}
+
+installEmacs(){
+
+	sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
 }
 
 init(){

@@ -12,6 +12,7 @@ backupDotfiles(){
  mv ~/.bashrc "$backup"
  mv ~/.gitconfig "$backup"
  mv ~/.bash_profile "$backup"
+ mv ~/.emacs.d "$backup"
 }
 
 installDotfiles(){
@@ -23,7 +24,11 @@ installDotfiles(){
  cp .tmux.conf ~/
  cp .bash_aliases ~/
 
+ cp -r .emacs.d ~/
+
  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && git clone https://github.com/altercation/vim-colors-solarized ~/.vim/bundle/vim-colors-solarized
+
+ git clone https://github.com/sellout/emacs-color-theme-solarized.git ~/.emacs.d/emacs-color-theme-solarized
 }
 
 configureGitDiff(){
@@ -61,6 +66,7 @@ init(){
  configureGitDiff
  installVundleDeps
  gconftool --type string --set /desktop/gnome/background/primary_color "#002b36"
+ sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
  echo "##################################################"
  echo "#####[info] : dotfiles installed \,,/#############"
  echo "##################################################"
