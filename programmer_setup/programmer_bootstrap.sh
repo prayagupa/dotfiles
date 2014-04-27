@@ -451,6 +451,12 @@ installEmacs(){
 	sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
 }
 
+installImmutant(){
+	version="1.1.1"
+	wget http://repository-projectodd.forge.cloudbees.com/release/org/immutant/immutant-dist/1.1.1/immutant-dist-$version-slim.zip -P ~/.lein
+
+}
+
 init(){
     installGit
     installClj
