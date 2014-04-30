@@ -12,6 +12,8 @@ alias gClone='git clone'
 alias gIncomingMasterStat='git fetch && git log ..origin/master --stat'
 alias gIncomingDevelopStat='git fetch && git log ..origin/develop --stat'
 
+alias gOutgoingDevelopStat='git fetch && git log origin/develop.. --stat'
+
 #incoming patch
 alias gIncomingMasterPatch='git fetch && git log ..origin/master --patch'
 alias gIncomingDevelopPatch='git fetch && git log ..origin/develop --patch'
