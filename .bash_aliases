@@ -6,6 +6,7 @@
 alias gs='git status'
 alias ga='git add'
 alias gco='git commit'
+alias gClone='git clone'
 
 #incoming stat
 alias gIncomingMasterStat='git fetch && git log ..origin/master --stat'
