@@ -5,7 +5,7 @@
 ########################################################################################
 alias gs='git status'
 alias ga='git add'
-alias gco='git commit'
+alias gCommit='git commit'
 alias gClone='git clone'
 
 #incoming stat
@@ -17,6 +17,9 @@ alias gOutgoingDevelopStat='git fetch && git log origin/develop.. --stat'
 #incoming patch
 alias gIncomingMasterPatch='git fetch && git log ..origin/master --patch'
 alias gIncomingDevelopPatch='git fetch && git log ..origin/develop --patch'
+
+#analyse commit
+alias gShow='git show'
 
 alias gPushMaster='git push origin master -v'
 alias gPushDevelop='git push origin develop -v'
