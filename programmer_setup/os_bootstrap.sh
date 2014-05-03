@@ -93,3 +93,7 @@ installRhythmboxGuitarPlugin(){
 	sudo chmod +x svn_install.sh
 	sudo ./svn_install.sh
 }
+
+powerConf(){
+	sudo apt-get install indicator-cpufreq
+}

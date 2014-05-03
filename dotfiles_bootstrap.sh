@@ -2,8 +2,8 @@
 ######## https://github.com/gf3/dotfiles/blob/master/bootstrap.sh ########
 ##########################################################################
 
-##BACKUP
 
+##BACKUP
 backup="$HOME/dotfiles_backup"
 backupDotfiles(){
  mkdir "$backup"
@@ -69,10 +69,43 @@ init(){
  installVundleDeps
  gconftool --type string --set /desktop/gnome/background/primary_color "#002b36"
  sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
- echo "##################################################"
- echo "#####[info] : dotfiles installed \,,/#############"
- echo "##################################################"
+ echo "####################################################"
+ echo "###### [info] : dotfiles installed \,,/ ############"
+ echo "####################################################"
+}
+
+update(){
+  cp .vimrc ~/
+  cp .bash_aliases ~/
+
+  echo "#########################################################"
+  echo "################## UPDATED ##############################"
+  echo "#########################################################"
 }
 
 ##main
-init
+start(){
+echo -n "######################################################## "
+echo
+echo -n "#################### select options #################### "
+echo
+echo -n "######################################################## "
+echo
+echo -n "INSTALLATION  - i "
+echo
+echo -n "UPDATE        - u "
+echo
+read option
+
+if [ 'i' == $option ] 
+then
+	init
+elif [ 'u' == $option ] 
+then
+        update
+else
+	echo "WTF"
+fi
+}
+
+start

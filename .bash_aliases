@@ -1,7 +1,12 @@
+
+CODE_SPACE="/packup/workspace.programming"
+MUSIC_SPACE="/packup/repo.music.audio_"
+WORKSPACE="$HOME/backup/makaluSeries"
+
 ########################################################################################
-#########################
-#########################     git aliases
-#########################
+######################################                 #################################
+######################################  [git aliases]  #################################
+######################################                 #################################
 ########################################################################################
 alias gs='git status'
 alias ga='git add'
@@ -32,15 +37,18 @@ alias gCheckout='git checkout'
 
 alias glpd="git log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short"
 
+#refactor
+alias gRemove='git rm -r'
+
 ########################################################################################
 #########################
 #########################     other personal aliases
 #########################
 ########################################################################################
 
-alias goMakalu='cd ~/backup/makaluSeries/makalu_develop/DasTest && git status'
-alias letscode='cd /packup/workspace.programming'
-alias music='cd /packup/repo.music.audio_/METAL'
+alias goMakalu='cd $WORKSPACE/makalu_develop/DasTest && git status'
+alias letscode='cd $CODE_SPACE'
+alias letsmusic='cd $MUSIC_SPACE/METAL && ls -l'
 
 alias androidStudioStart='/usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &'
 
