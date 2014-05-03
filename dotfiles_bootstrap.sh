@@ -75,6 +75,9 @@ init(){
 }
 
 update(){
+  mkdir $HOME/dotfiles_backup_u
+  mv ~/.vimrc $HOME/dotfiles_backup_u
+  mv ~/.bash_aliases $HOME/dotfiles_backup_u
   cp .vimrc ~/
   cp .bash_aliases ~/
 
