@@ -1,7 +1,7 @@
-
+##TODO move these to configuration.sh
 CODE_SPACE="/packup/workspace.programming"
 MUSIC_SPACE="/packup/repo.music.audio_"
-WORKSPACE="$HOME/backup/makaluSeries"
+WORKSPACE="$HOME/backup/hacker_/w.groovy/"
 
 ########################################################################################
 ######################################                 #################################
@@ -12,6 +12,12 @@ alias gs='git status'
 alias ga='git add'
 alias gCommit='git commit'
 alias gClone='git clone'
+
+##stash'ing
+alias gStash='git stash'
+##git stash show in diff style
+alias gStashShow='git stash show -p'
+alias gStashPop='git stash pop'
 
 #incoming stat
 alias gIncomingMasterStat='git fetch && git log ..origin/master --stat'
@@ -46,7 +52,7 @@ alias gRemove='git rm -r'
 #########################
 ########################################################################################
 
-alias goMakalu='cd $WORKSPACE/makalu_develop/DasTest && git status'
+alias goMakalu='cd $WORKSPACE/DasBackend/DasTest && git status'
 alias letscode='cd $CODE_SPACE'
 alias letsmusic='cd $MUSIC_SPACE/METAL && ls -l'
 
