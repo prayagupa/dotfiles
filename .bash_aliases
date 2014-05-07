@@ -40,6 +40,9 @@ alias gPullDevelop='git pull origin develop -v'
 
 alias gDiff='git diff'
 alias gCheckout='git checkout'
+alias gCreateLocalBranch='git checkout -b'
+alias gPushLocalBranch='git push -u origin'
+alias gRemoteUpdate='git remote update'
 
 alias glpd="git log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short"
 
