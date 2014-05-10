@@ -34,15 +34,20 @@ alias gPushDevelop='git push origin develop -v'
 alias gPullMaster='git pull origin master -v'
 alias gPullDevelop='git pull origin develop -v'
 
-alias gDiff='git diff'
+alias gDiff='git diff --word-diff="color"'
 alias gCheckout='git checkout'
+#branching
 alias gSwitchBranch='git checkout'
 alias gCreateLocalBranch='git checkout -b'
-alias gPushLocalBranch='git push -u origin'
+alias gPushLocalBranch='git push -u origin' #_ branchName
+alias gDeleteBranch='git push origin --delete'
 alias gRemoteUpdate='git remote update'
-alias gMergeBranch='git merge' #eg. gMergeBranch origin/cashless-spring-security
+alias gMergeBranch='git merge' #eg. staying on main branch, gMergeBranch origin/cashless-spring-security
 
+##log
 alias glpd="git log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short"
+alias glpdr="git log --graph --pretty=format:'%Cred%h%Creset %an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+#@see:https://github.com/cypher/dotfiles/blob/master/gitconfig
 
 #refactor
 alias gRemove='git rm -r'
@@ -62,3 +67,6 @@ alias androidStudioStart='/usr/local/android-studio/bin/studio.sh > /usr/local/a
 alias enoughCoding='sudo shutdown -h now'
 ##while sleeping
 alias musicalSleep='sudo shutdown -h 60'
+alias soundcardCheck='sudo aplay -l'
+
+alias findPort='sudo lsof -iTCP -sTCP:LISTEN | grep' #findPort amqp

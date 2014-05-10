@@ -38,10 +38,16 @@
 
 
 [alias]
+        # Show table like compact log
+	l="!git log --graph --pretty='tformat:%C(yellow)%h{%C(green)%ar{%C(bold blue)%an{%C(red)%d%C(reset) %s' $* | column -t -s '{' | less -FXRS"
+	# log commits showing changed files
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+        ra = log --graph --abbrev-commit --date=relative -20 --all --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+        #
 	lp  = log --pretty=format:'%h %ad %s (%an)' --date=short
 	ld  = git log --graph --all --decorate
         lpd = log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short
 	out = log --pretty=oneline --abbrev-commit --graph ..@{u}
 	in = !git fetch && git log --pretty=oneline --abbrev-commit --graph @{u}..
-	git-incoming=git fetch && git log ..origin/develop --stat
-	my-commits=log --author="PrayagUpd" --stat
+	incoming=fetch && git log ..origin/develop --stat
+	mycommits=log --author="PrayagUpd" --stat

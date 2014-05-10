@@ -16,13 +16,17 @@ unzipIt(){
 	sudo unzip $1 -d $DEFAULT_INSTALLATION_DEST
 }
 
-setPermission777(){
+setPermissionRWE(){
 				sudo chmod -R 777 $1
 
 }
 
 setPermission(){
 				sudo chmod -R ugo+rw $1
+}
+
+wgetIt(){
+   wget $1 -P $DEFAULT_SOURCE_ROOT
 }
 
 showMessage(){
@@ -111,7 +115,7 @@ installPlayFramework(){
 				PLAY_URL="http://downloads.typesafe.com/play/$PLAY_VERSION/play-$PLAY_VERSION.zip"
 				wget $PLAY_URL  -P $DEFAULT_SOURCE_ROOT_JVM/scala/
 				sudo unzip  $DEFAULT_SOURCE_ROOT_JVM/scala/play-$PLAY_VERSION -d $DEFAULT_INSTALLATION_DEST
-        setPermission777 $DEFAULT_INSTALLATION_DEST/play-$PLAY_VERSION
+        setPermissionRWE $DEFAULT_INSTALLATION_DEST/play-$PLAY_VERSION
  cat >> ~/.bash_profile <<'EOF'
   ###############################
   ########### play #############
@@ -126,11 +130,11 @@ EOF
 }
 
 installGrails(){
- TOOL="grails"
+ GRAILS_TOOL="grails"
  GRAILS_VERSION="2.3.3"
- GRAILS_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT_JVM/GroovyOnGrails/$TOOL-$GRAILS_VERSION.zip"
+ GRAILS_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT_JVM/GroovyOnGrails/$GRAILS_TOOL-$GRAILS_VERSION.zip"
  unzipIt $GRAILS_LOCATION_SOURCE
- setPermission777 $DEFAULT_INSTALLATION_DEST/$TOOL-$GRAILS_VERSION
+ setPermissionRWE $DEFAULT_INSTALLATION_DEST/$GRAILS_TOOL-$GRAILS_VERSION
 
 # cat >> ~/.bash_profile <<'EOF'
 #  ###############################
@@ -178,7 +182,7 @@ EOF
 ########################## ANDROID ##############################################################
 #################################################################################################
 androidInstall(){
-  ANDROID_STUDIO_LOCATION="/media/prayagupd/Elements/_backup/backup/android-studio-prayag.zip"
+  ANDROID_STUDIO_LOCATION="$DEFAULT_SOURCE_ROOT/android-studio-prayag.zip"
   sudo unzip $ANDROID_STUDIO_LOCATION -d $DEFAULT_INSTALLATION_DEST
   sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/android-studio
   echo "Android studio installed to /usr/local."
@@ -284,7 +288,7 @@ configureSSH(){
 installElasticsearch(){
 				VERSION_ES="1.1.0"
 				ES_HOME=$DEFAULT_INSTLLATION_DEST/elasticsearch-$ES_VERSION
-				sudo tar -zxvf $DEFAULT_SOURCE_ROOT_JVM/Solr-Lucene-ES\(Big\ Data\)/elasticsearch-$VERSION_ES.tar.gz -C $DEFAULT_INSTALLATION_DEST
+				sudo tar -zxvf $DEFAULT_SOURCE_ROOT_JVM/SolrLuceneES-BigData/elasticsearch-$VERSION_ES.tar.gz -C $DEFAULT_INSTALLATION_DEST
 				sudo chmod -R ugo+rw $ES_HOME
           	                $ES_HOME/bin/plugin -i elasticsearch/marvel/latest
 }
@@ -435,15 +439,27 @@ EOF
  reloadProfileConf
 }
 
-installErlang(){
-    sudo apt-get update && sudo apt-get install erlang 
-}
-
 installRabbitMQ(){
-      
-      wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.2.4/rabbitmq-server-generic-unix-3.2.4.tar.gz && tar -zxvf rabbitmq-server-generic-unix-3.2.4.tar.gz 
+	RABBIT_VERSION="3.2.4"
+	RABBIT_TOOL="rabbitmq-server-generic-unix-$RABBIT_VERSION.tar.gz"
+	RABBIT_PATH="$DEFAULT_SOURCE_ROOT/JVM/SolrLuceneES-BigData/$RABBIT_TOOL"
+	RABBIT_URL="http://www.rabbitmq.com/releases/rabbitmq-server/v3.2.4/$RABBIT_TOOL"
+	RABBIT_DEST="rabbitmq_server-3.2.4"
+        #wget $RABBIT_URL && tarIt $RABBIT_PATH
+	tarIt $RABBIT_PATH
+	setPermissionRWE $DEFAULT_DEFAULT_DESTINATION/$RABBIT_DEST
+cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### NEO4J ###########
+  ###############################
+  RABBIT_HOME=/usr/local/rabbitmq_server-3.2.4
+  export RABBIT_HOME
+  export PATH=$PATH:$RABBIT_HOME/sbin
+EOF
 
-cd rabbitmq_server-3.2.4 && sbin/rabbitmq-server
+ reloadProfileConf
+ 
+ installErlang
 }
 
 installEmacs(){
@@ -452,8 +468,8 @@ installEmacs(){
 }
 
 installImmutant(){
-	version="1.1.1"
-	wget http://repository-projectodd.forge.cloudbees.com/release/org/immutant/immutant-dist/1.1.1/immutant-dist-$version-slim.zip -P ~/.lein
+	immutant_version="1.1.1"
+	wget http://repository-projectodd.forge.cloudbees.com/release/org/immutant/immutant-dist/1.1.1/immutant-dist-$immutant_version-slim.zip -P ~/.lein
 
 }
 
