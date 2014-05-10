@@ -1,7 +1,3 @@
-##TODO move these to configuration.sh
-CODE_SPACE="/packup/workspace.programming"
-MUSIC_SPACE="/packup/repo.music.audio_"
-WORKSPACE="$HOME/backup/hacker_/w.groovy/"
 
 ########################################################################################
 ######################################                 #################################
