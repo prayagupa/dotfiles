@@ -33,9 +33,11 @@ alias gPushDevelop='git push origin develop -v'
 
 alias gPullMaster='git pull origin master -v'
 alias gPullDevelop='git pull origin develop -v'
+alias gPullAllBranches='git pull'
 
 alias gDiff='git diff --word-diff="color"'
 alias gCheckout='git checkout'
+
 #branching
 alias gSwitchBranch='git checkout'
 alias gCreateLocalBranch='git checkout -b'

@@ -69,12 +69,18 @@ init(){
  installVundleDeps
  gconftool --type string --set /desktop/gnome/background/primary_color "#002b36"
  sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
+ sudo apt-get install tmux
  echo "####################################################"
  echo "###### [info] : dotfiles installed \,,/ ############"
  echo "####################################################"
 }
 
 update(){
+
+  echo "#########################################################"
+  echo "################ Updating .bash_aliases, .vimrc  ########"
+  echo "#########################################################"
+
   mkdir $HOME/dotfiles_backup_u
   mv ~/.vimrc $HOME/dotfiles_backup_u
   mv ~/.bash_aliases $HOME/dotfiles_backup_u
@@ -82,7 +88,7 @@ update(){
   cp .bash_aliases ~/
 
   echo "#########################################################"
-  echo "################## UPDATED ##############################"
+  echo "################## dotfiles UPDATED #####################"
   echo "#########################################################"
 }
 
@@ -96,7 +102,7 @@ echo -n "######################################################## "
 echo
 echo -n "INSTALLATION  - i "
 echo
-echo -n "UPDATE        - u "
+echo -n "UPDATE        - u (.vimrc, .bash_aliases)"
 echo
 read option
 
@@ -107,7 +113,7 @@ elif [ 'u' == $option ]
 then
         update
 else
-	echo "WTF"
+	echo "WTF !!! "
 fi
 }
 

@@ -55,7 +55,7 @@ Bundle 'gmarik/vundle'
 
 " ===============Prayag's Bundles here===========================
 " ===============original repos on github========================
-Bundle "loki-nkl/vim-mysql-mode"
+"Bundle "loki-nkl/vim-mysql-mode"
 Bundle 'phleet/vim-mercenary'
 Bundle 'bling/vim-airline'
 

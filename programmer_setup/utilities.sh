@@ -1,3 +1,7 @@
+declare -a algorithms=("https://www.youtube.com/watch?v=gtWw_8VvHjk"
+                       "https://www.youtube.com/watch?v=C5SPsY72_CM" 
+		       "element3")
+
 configureMP3Codecs(){
   sudo apt-get install ffmpeg libavcodec-extra-53
 }
@@ -26,4 +30,12 @@ installYoutubeDownloader(){
 
 downloadMP3(){
   youtube-dl --extract-audio --audio-format mp3 $1
+}
+
+installDesktopRecorder(){
+	sudo apt-get install gtk-recordmydesktop
+}
+
+convertOgvToFlv(){
+	ffmpeg -sameq -i $1 $2
 }
