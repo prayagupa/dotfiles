@@ -44,7 +44,7 @@ alias gCreateLocalBranch='git checkout -b'
 alias gPushLocalBranch='git push -u origin' #_ branchName
 alias gDeleteBranch='git push origin --delete'
 alias gRemoteUpdate='git remote update'
-alias gMergeBranch='git merge' #eg. staying on main branch, gMergeBranch origin/cashless-spring-security
+alias gMergeBranch='git merge' #eg. staying on main branch(say develop), gMergeBranch origin/cashless-spring-security
 
 ##log
 alias glpd="git log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short"
@@ -53,6 +53,14 @@ alias glpdr="git log --graph --pretty=format:'%Cred%h%Creset %an -%C(yellow)%d%C
 
 #refactor
 alias gRemove='git rm -r'
+
+#patches
+## @see : http://stackoverflow.com/a/16172120/432903
+#
+alias gCreatePatch='git format-patch' #@ref : http://stackoverflow.com/a/23340391/432903
+alias gCreatePatcheLast10Commits='git format-patch -10 HEAD --stdout > last-10-commits.patch'
+alias gApplyPatches='git apply --stat' #eg. gApplyPatch  gccount/patches/high_riskscore.patch
+
 
 ########################################################################################
 #########################
