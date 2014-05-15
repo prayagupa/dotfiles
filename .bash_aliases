@@ -6,6 +6,7 @@
 ########################################################################################
 alias gs='git status'
 alias ga='git add'
+alias gaUndo='git reset' #gaUndo [file]
 alias gCommit='git commit'
 alias gClone='git clone'
 
@@ -47,7 +48,7 @@ alias gRemoteUpdate='git remote update'
 alias gMergeBranch='git merge' #eg. staying on main branch(say develop), gMergeBranch origin/cashless-spring-security
 
 ##log
-alias glpd="git log --graph --all --decorate --pretty=format:'%h %ad %s (%an)' --date=short"
+alias glpd="git log --graph --all --decorate --pretty=format:'%Cred%h%Creset %ad %s (%an)' --date=short"
 alias glpdr="git log --graph --pretty=format:'%Cred%h%Creset %an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 #@see:https://github.com/cypher/dotfiles/blob/master/gitconfig
 
@@ -74,6 +75,7 @@ alias letsmusic='cd $MUSIC_SPACE/METAL && ls -l'
 
 alias androidStudioStart='/usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &'
 
+alias reboot='sudo reboot'
 alias enoughCoding='sudo shutdown -h now'
 ##while sleeping
 alias musicalSleep='sudo shutdown -h 60'

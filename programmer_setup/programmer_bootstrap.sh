@@ -444,7 +444,7 @@ installCassandra(){
 	CASSANDRA_FILE="apache-cassandra-$CASSANDRA_VERSION"
 	CASSANDRA_FILE_TAR="$CASSANDRA_FILE-bin.tar.gz"
 	CASSANDRA_DOWNLOAD_URL="http://www.dsgnwrld.com/am/cassandra/$CASSANDRA_VERSION/$CASSANDRA_FILE_TAR"
-	wgetIt $CASSANDRA_DOWNLOAD_URL
+	#wgetIt $CASSANDRA_DOWNLOAD_URL ##comment it out to install from existing tar
 	tarIt $DEFAULT_SOURCE_ROOT/$CASSANDRA_FILE_TAR
 	setPermission $DEFAULT_INSTALLATION_DEST/$CASSANDRA_FILE
 cat >> ~/.bash_profile <<'EOF'
@@ -464,7 +464,7 @@ installRabbitMQ(){
 	RABBIT_PATH="$DEFAULT_SOURCE_ROOT/JVM/SolrLuceneES-BigData/$RABBIT_TOOL"
 	RABBIT_URL="http://www.rabbitmq.com/releases/rabbitmq-server/v3.2.4/$RABBIT_TOOL"
 	RABBIT_DEST="rabbitmq_server-3.2.4"
-        #wget $RABBIT_URL && tarIt $RABBIT_PATH
+        #wgetIt $RABBIT_URL && tarIt $RABBIT_PATH
 	tarIt $RABBIT_PATH
 	setPermissionRWE $DEFAULT_DEFAULT_DESTINATION/$RABBIT_DEST
 cat >> ~/.bash_profile <<'EOF'
