@@ -424,8 +424,8 @@ installNeo4j(){
 	NEO4J_VERSION="1.9.7"
 	NEO4J_FILE="neo4j-community-$NEO4J_VERSION"
 	NEO4J_FILE_TAR="$NEO4J_FILE-unix.tar.gz"
-	DOWNLOAD_URL_="http://dist.neo4j.org/neo4j-community-1.9.7-unix.tar.gz"
-	#wget $DOWNLOAD_URL -P $DEFAULT_SOURCE_ROOT
+	NEO4J_DOWNLOAD_URL_="http://dist.neo4j.org/neo4j-community-1.9.7-unix.tar.gz"
+	#wget $NEO4J_DOWNLOAD_URL -P $DEFAULT_SOURCE_ROOT
 	tarIt $DEFAULT_SOURCE_ROOT/$NEO4J_FILE_TAR
 	setPermission $DEFAULT_INSTALLATION_DEST/$NEO4J_FILE
 cat >> ~/.bash_profile <<'EOF'
@@ -435,6 +435,25 @@ cat >> ~/.bash_profile <<'EOF'
   NEO4J_HOME=/usr/local/neo4j-community-1.9.7
   export NEO4J_HOME
   export PATH=$PATH:$NEO4J_HOME/bin
+EOF
+ reloadProfileConf
+}
+
+installCassandra(){
+	CASSANDRA_VERSION="2.0.7"
+	CASSANDRA_FILE="apache-cassandra-$CASSANDRA_VERSION"
+	CASSANDRA_FILE_TAR="$CASSANDRA_FILE-bin.tar.gz"
+	CASSANDRA_DOWNLOAD_URL="http://www.dsgnwrld.com/am/cassandra/$CASSANDRA_VERSION/$CASSANDRA_FILE_TAR"
+	wgetIt $CASSANDRA_DOWNLOAD_URL
+	tarIt $DEFAULT_SOURCE_ROOT/$CASSANDRA_FILE_TAR
+	setPermission $DEFAULT_INSTALLATION_DEST/$CASSANDRA_FILE
+cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### CASSANDRA #########
+  ###############################
+  CASSANDRA_HOME=/usr/local/apache-cassandra-2.0.7
+  export CASSANDRA_HOME
+  export PATH=$PATH:$CASSANDRA_HOME/bin
 EOF
  reloadProfileConf
 }
