@@ -1,6 +1,7 @@
 ##for 64 bit
 
-DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
+#DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
+DEFAULT_SOURCE_ROOT="~/backup/JVM"
 DEFAULT_SOURCE_ROOT_JVM="/packup/repo.softwares/JVM"
 DEFAULT_INSTALLATION_DEST="/usr/local/"
 
@@ -479,6 +480,30 @@ EOF
  reloadProfileConf
  
  installErlang
+}
+
+
+installHadoop(){
+	HADOOP_VERSION="2.2.0"
+	HADOOP_TOOL="hadoop-$HADOOP_VERSION.tar.gz"
+	HADOOP_PATH="$DEFAULT_SOURCE_ROOT/$HADOOP_TOOL"
+	HADOOP_URL="http://www.eng.lsu.edu/mirrors/apache/hadoop/common/hadoop-$HADOOP_VERSION/$HADOOP_TOOL"
+	HADOOP_DEST="hadoop-$HADOOP_VERSION"
+        #wgetIt $HADOOP_URL
+	tarIt $HADOOP_PATH
+	setPermissionRWE $DEFAULT_DEFAULT_DESTINATION/$HADOOP_DEST
+cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### HADOOP ############
+  ###############################
+  RABBIT_HOME=/usr/local/hadoop-2.2.0
+  export HADOOP_HOME
+  export PATH=$PATH:$HADOOP_HOME/bin
+EOF
+
+ reloadProfileConf
+ 
+
 }
 
 installEmacs(){

@@ -21,6 +21,7 @@ alias gIncomingMasterStat='git fetch && git log ..origin/master --stat'
 alias gIncomingDevelopStat='git fetch && git log ..origin/develop --stat'
 
 alias gOutgoingDevelopStat='git fetch && git log origin/develop.. --stat'
+alias gOutgoingMasterStat='git log --pretty=oneline --abbrev-commit --graph @{u}.. --stat'
 
 #incoming patch
 alias gIncomingMasterPatch='git fetch && git log ..origin/master --patch'
@@ -54,6 +55,7 @@ alias glpdr="git log --graph --pretty=format:'%Cred%h%Creset %an -%C(yellow)%d%C
 
 #refactor
 alias gRemove='git rm -r'
+alias gCheckoutToSpecificCommit='git checkout -b' ##gCheckoutToSpecificCommit BRANCH_NAME 0d1d7fc32
 
 #patches
 ## @see : http://stackoverflow.com/a/16172120/432903
@@ -69,7 +71,7 @@ alias gApplyPatches='git apply --stat' #eg. gApplyPatch  gccount/patches/high_ri
 #########################
 ########################################################################################
 
-alias goMakalu='cd $WORKSPACE/DasBackend/DasTest && git status'
+alias goMakalu='cd $WORKSPACE/MakaluDevelop/DasTest && git status'
 alias letscode='cd $CODE_SPACE'
 alias letsmusic='cd $MUSIC_SPACE/METAL && ls -l'
 
@@ -82,3 +84,4 @@ alias musicalSleep='sudo shutdown -h 60'
 alias soundcardCheck='sudo aplay -l'
 
 alias findPort='sudo lsof -iTCP -sTCP:LISTEN | grep' #findPort amqp
+alias trash='sudo rm -rf ~/.local/share/Trash/*'
