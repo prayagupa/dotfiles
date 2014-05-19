@@ -302,19 +302,22 @@ installMysql(){
 # https://github.com/nathanmarz/storm/wiki/Setting-up-development-environment
 
 installStorm(){
-	STORM_VERSION=0.8.2
-	SOURCE="storm-$STORM_VERSION"
-	#wget https://dl.dropboxusercontent.com/s/fl4kr7w0oc8ihdw/storm-0.8.2.zip?dl=1&token_hash=AAEAQiAKkgRc2Y2YI7zmIBOWe06neX5APneao4hUzO2bEQ
-	
-	sudo unzip $SOURCE.zip -d $DEFAULT_INSTALLATION_DEST
-	sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$SOURCE
+	STORM_VERSION="0.8.2"
+	STORM_SOURCE="storm-$STORM_VERSION"
+        STORM_DOWNLOAD_URL="https://dl.dropboxusercontent.com/s/fl4kr7w0oc8ihdw/storm-0.8.2.zip?dl=1&token_hash=AAEAQiAKkgRc2Y2YI7zmIBOWe06neX5APneao4hUzO2bEQ"
+	#wgetIt $STORM_DOWNLOAD_URL
+	unzipIt "$DEFAULT_SOURCE_ROOT/JVM/SolrLuceneES-BigData/$STORM_SOURCE.zip"
+	sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$STORM_SOURCE
+
 cat >> ~/.bash_profile <<'EOF'
+  
   ###############################
   ########### STORM ###############
   ###############################
   STORM_HOME=/usr/local/storm-0.8.2
   export STORM_HOME
   export PATH=$PATH:$STORM_HOME/bin
+
 EOF
 
    reloadProfileConf
@@ -515,6 +518,27 @@ installImmutant(){
 	immutant_version="1.1.1"
 	wget http://repository-projectodd.forge.cloudbees.com/release/org/immutant/immutant-dist/1.1.1/immutant-dist-$immutant_version-slim.zip -P ~/.lein
 
+}
+
+##https://www.virtualbox.org/wiki/Linux_Downloads
+installVBox(){
+	VBox_MAJ_VERSION="4.3"
+	VBox_MIN_VERSION="4.3.12"
+        VBox_TOOL="virtualbox-$VBox_MAJOR_VERSION_$VBox_MIN_VERSION"
+	VBox_TOOL_DEB="virtualbox-4.3_4.3.12-93733~Ubuntu~raring_amd64.deb"
+	VBox_URL="http://download.virtualbox.org/virtualbox/4.3.12/$VBox_TOOL-93733~Ubuntu~raring_amd64.deb"
+	if [ ! -e $VBox_TOOL_DEB ]; then
+	   wgetIt $VBox_URL
+        else
+           echo "$VBox_TOOL_DEB exists"
+        fi
+        dpkgInstall "$DEFAULT_SOURCE_ROOT/$VBox_TOOL_DEB"
+}
+
+installUnetBootIn(){
+	sudo apt-get install p7zip
+	sudo apt-get install p7zip-full
+        sudo /packup/repo.softwares/linux/unetbootin-linux-603
 }
 
 init(){

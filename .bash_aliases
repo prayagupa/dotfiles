@@ -71,6 +71,10 @@ alias gApplyPatches='git apply --stat' #eg. gApplyPatch  gccount/patches/high_ri
 #########################
 ########################################################################################
 
+alias lh='ls -lh'
+alias filespaceUsage='du --max-depth=1 -h'
+alias fileSpaceUsageSort='du -sm * | sort -n | tail -n 20'
+
 alias goMakalu='cd $WORKSPACE/MakaluDevelop/DasTest && git status'
 alias letscode='cd $CODE_SPACE'
 alias letsmusic='cd $MUSIC_SPACE/METAL && ls -l'
@@ -85,3 +89,13 @@ alias soundcardCheck='sudo aplay -l'
 
 alias findPort='sudo lsof -iTCP -sTCP:LISTEN | grep' #findPort amqp
 alias trash='sudo rm -rf ~/.local/share/Trash/*'
+
+alias dpkgInstall='sudo dpkg -i'
+alias diskspaceUsage='df -h'
+
+alias kernelVersion='uname -r'
+alias kernelBit='uname -m'
+
+#VBox
+# @see : https://groups.google.com/forum/#!topic/pallet-clj/NA6yTHq7LN4
+alias vBoxBridgeDifs='VBoxManage list bridgedifs | grep ^Name'
