@@ -27,7 +27,13 @@ setPermission(){
 }
 
 wgetIt(){
+   echo "[info] : wgetting $1 to $DEFAULT_SOURCE_ROOT."	
+   echo ""
    wget $1 -P $DEFAULT_SOURCE_ROOT
+
+   echo ""
+   echo "[info] : wgetting $1 to $DEFAULT_SOURCE_ROOT finished."	
+   echo ""
 }
 
 showMessage(){
@@ -522,15 +528,16 @@ installImmutant(){
 
 ##https://www.virtualbox.org/wiki/Linux_Downloads
 installVBox(){
-	VBox_MAJ_VERSION="4.3"
-	VBox_MIN_VERSION="4.3.12"
+	VBox_MAJ_VERSION="4.2"    #"4.3"
+	VBox_MIN_VERSION="4.2.24" #"4.3.12"
         VBox_TOOL="virtualbox-$VBox_MAJOR_VERSION_$VBox_MIN_VERSION"
-	VBox_TOOL_DEB="virtualbox-4.3_4.3.12-93733~Ubuntu~raring_amd64.deb"
-	VBox_URL="http://download.virtualbox.org/virtualbox/4.3.12/$VBox_TOOL-93733~Ubuntu~raring_amd64.deb"
+	#VBox_TOOL_DEB="virtualbox-4.3_4.3.12-93733~Ubuntu~raring_amd64.deb"
+	VBox_TOOL_DEB="virtualbox-4.2_4.2.24-92790~Ubuntu~raring_amd64.deb"
+	VBox_URL="http://download.virtualbox.org/virtualbox/$VBox_MIN_VERSION/$VBox_TOOL_DEB"
 	if [ ! -e $VBox_TOOL_DEB ]; then
 	   wgetIt $VBox_URL
         else
-           echo "$VBox_TOOL_DEB exists"
+           echo "$DEFAULT_SOURCE_ROOT/$VBox_TOOL_DEB exists"
         fi
         dpkgInstall "$DEFAULT_SOURCE_ROOT/$VBox_TOOL_DEB"
 }
@@ -538,16 +545,23 @@ installVBox(){
 installUnetBootIn(){
 	sudo apt-get install p7zip
 	sudo apt-get install p7zip-full
-        sudo /packup/repo.softwares/linux/unetbootin-linux-603
+	UNET_DOWNLOAD_URL="http://unetbootin.sourceforge.net/unetbootin-linux-latest"
+	wgetIt $UNET_DOWNLOAD_URL 
+        sudo $DEFAULT_SOURCE_ROOT/unetbootin-linux-603
 }
 
-init(){
+programmer_setup_init(){
     installGit
     installClj
     installJdk
-		installGrails
+    installGrails
     installElasticsearch
     installMysql
 }
 
-#init
+#programmer_setup_init
+
+#programmerSetup(){
+    #show options to install tools
+    #ask to enter a command
+#}

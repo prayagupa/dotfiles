@@ -72,7 +72,7 @@ alias gApplyPatches='git apply --stat' #eg. gApplyPatch  gccount/patches/high_ri
 ########################################################################################
 
 alias lh='ls -lh'
-alias filespaceUsage='du --max-depth=1 -h'
+alias fileSpaceUsage='du --max-depth=1 -h'
 alias fileSpaceUsageSort='du -sm * | sort -n | tail -n 20'
 
 alias goMakalu='cd $WORKSPACE/MakaluDevelop/DasTest && git status'

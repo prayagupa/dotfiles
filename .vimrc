@@ -192,3 +192,9 @@ set foldlevelstart=1
 " :let g:snips_trigger_key = '<tab>'
 " :imap <C-J> <Plug>snipMateNextOrTrigger
 " :smap <C-J> <Plug>snipMateNextOrTrigger
+
+
+"" Settings for VimClojure 
+let vimclojure#HighlightBuiltins   = 1
+let vimclojure#ParenRainbow        = 1
+let vimclojure#DynamicHighlighting = 1
