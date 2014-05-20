@@ -41,12 +41,22 @@ alias gDiff='git diff --word-diff="color"'
 alias gCheckout='git checkout'
 
 #branching
+alias gBranchesLocal='git branch'
+alias gBranchesRemote='git branch -r'
+
 alias gSwitchBranch='git checkout'
 alias gCreateLocalBranch='git checkout -b'
-alias gPushLocalBranch='git push -u origin' #_ branchName
-alias gDeleteBranch='git push origin --delete'
+alias gPushLocalBranch='git push -u origin' #usage gPushLocalBranch_ branchName
+alias gDeleteLocalBranch='git branch -d'    #usage gDeleteLocalBranch branchName
+alias gDeleteRemoteBranch='git push origin --delete'  #usage gDeleteRemoteBranch cashless-spring-security 
 alias gRemoteUpdate='git remote update'
 alias gMergeBranch='git merge' #eg. staying on main branch(say develop), gMergeBranch origin/cashless-spring-security
+
+#@see : http://stackoverflow.com/a/5188364/432903
+alias gBranchesCommiterDateMessages='git branch -vv'
+alias gBranchesCommiterDate='git for-each-ref --sort=-committerdate refs/heads/'
+alias gBranchesCommiterDateFormat='git for-each-ref --sort=-committerdate refs/heads/ --format="%(authordate:short)%09%(objectname:short)%09%1B[0;33m%(refname:short)%1B[m%09"'
+alias gBranchesCommiterDatePretty='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
 
 ##log
 alias glpd="git log --graph --all --decorate --pretty=format:'%Cred%h%Creset %ad %s (%an)' --date=short"
@@ -99,3 +109,6 @@ alias kernelBit='uname -m'
 #VBox
 # @see : https://groups.google.com/forum/#!topic/pallet-clj/NA6yTHq7LN4
 alias vBoxBridgeDifs='VBoxManage list bridgedifs | grep ^Name'
+alias vBoxBridgeDifs='VBoxManage convertfromraw $1 $2'
+
+alias checkProxy='env | grep -i proxy'
