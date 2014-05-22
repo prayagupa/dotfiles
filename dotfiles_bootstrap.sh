@@ -6,6 +6,10 @@
 ##BACKUP
 backup="$HOME/dotfiles_backup"
 backupDotfiles(){
+ echo ""
+ echo "Backing up your dotfiles to $backup."
+ echo ""
+
  mkdir "$backup"
  mv ~/.vim "$backup"
  mv ~/.vimrc "$backup"
@@ -13,6 +17,10 @@ backupDotfiles(){
  mv ~/.gitconfig "$backup"
  mv ~/.bash_profile "$backup"
  mv ~/.emacs.d "$backup"
+
+ echo ""
+ echo "Backing up your dotfiles to $backup is successful."
+ echo ""
 }
 
 installDotfiles(){
