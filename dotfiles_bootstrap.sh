@@ -76,24 +76,45 @@ installEmacs(){
 	sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
 }
 
+# @see : http://linuxg.net/how-to-install-vim-7-4-on-ubuntu-13-10-13-04-12-04-linux-mint-16-15-13-and-debian-sid/
+# VIm 7.4
+installVIm(){
+	sudo add-apt-repository ppa:fcwu-tw/ppa
+	sudo apt-get update
+	sudo apt-get install vim
+}
+
+installXLibs(){
+	sudo apt-get install lua5.1
+	#for YouCompleteMe vim plugin
+	# https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64-super-quick-installation
+	sudo apt-get install build-essential cmake
+	sudo apt-get install python-dev
+	#cd ~/.vim/bundle/YouCompleteMe/
+	#./install.sh
+}
+
 init(){
  backupDotfiles
  installDotfiles
  askForGitconfigUser
  configureGitDiff
+ installVIm
+ installXLibs
  installVundleDeps
  gconftool --type string --set /desktop/gnome/background/primary_color "#002b36"
 
  installEmacs
 
  sudo apt-get install tmux
+ echo ""
  echo "####################################################"
  echo "###### [info] : dotfiles installed \,,/ ############"
  echo "####################################################"
 }
 
 update(){
-
+  echo ""
   echo "#########################################################"
   echo "################ Updating .bash_aliases, .vimrc  ########"
   echo "#########################################################"
@@ -103,7 +124,9 @@ update(){
   mv ~/.bash_aliases $HOME/dotfiles_backup_u
   cp .vimrc ~/
   cp .bash_aliases ~/
+  installVundleDeps
 
+  echo ""
   echo "#########################################################"
   echo "################## dotfiles UPDATED #####################"
   echo "#########################################################"

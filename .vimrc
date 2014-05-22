@@ -68,6 +68,10 @@ Bundle "honza/vim-snippets"
 Bundle 'kien/ctrlp.vim'
 " Bundle "msanders/snipmate.vim"
 Bundle "garbas/vim-snipmate"
+"You Complete Me
+Bundle "Valloric/YouCompleteMe"
+"Bundle "Shougo/neocomplete.vim"
+Bundle "scrooloose/nerdtree"
 " ===============================================================
 
 

@@ -106,9 +106,15 @@ alias diskspaceUsage='df -h'
 alias kernelVersion='uname -r'
 alias kernelBit='uname -m'
 
-#VBox
-# @see : https://groups.google.com/forum/#!topic/pallet-clj/NA6yTHq7LN4
-alias vBoxBridgeDifs='VBoxManage list bridgedifs | grep ^Name'
-alias vBoxBridgeDifs='VBoxManage convertfromraw $1 $2'
 
 alias checkProxy='env | grep -i proxy'
+
+#VBox
+# @see : http://forum.linuxcareer.com/threads/1782-Virtualbox-check-virtual-machine-status-from-command-line
+alias vBoxListVMs='VBoxManage list vms'
+alias vBoxRunningVMs='vboxmanage list runningvms'
+# @see : http://www.edwardstafford.com/2009/11/08/how-to-using-vboxmanage-to-delete-a-virtual-machine-from-virtualbox/
+alias vBoxShownInfo='VBoxManage showvminfo'
+alias vBoxShowHDDs='VBoxManage list hdds'
+# @see : https://groups.google.com/forum/#!topic/pallet-clj/NA6yTHq7LN4
+alias vBoxBridgeDifs='VBoxManage list bridgedifs | grep ^Name'
