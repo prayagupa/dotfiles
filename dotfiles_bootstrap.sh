@@ -7,7 +7,7 @@
 backup="$HOME/dotfiles_backup"
 backupDotfiles(){
  echo ""
- echo "Backing up your dotfiles to $backup."
+ echo "[info] : Backing up your dotfiles to $backup."
  echo ""
 
  mkdir "$backup"
@@ -19,11 +19,16 @@ backupDotfiles(){
  mv ~/.emacs.d "$backup"
 
  echo ""
- echo "Backing up your dotfiles to $backup is successful."
+ echo "[info] : Backing up your dotfiles to $backup seems successful."
  echo ""
 }
 
 installDotfiles(){
+
+ echo ""
+ echo "[info] : Installing dotfiles to $HOME............."
+ echo ""
+
  cp -r .vim ~/
  cp .vimrc ~/
  cp .bash_profile ~/
@@ -39,9 +44,19 @@ installDotfiles(){
  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && git clone https://github.com/altercation/vim-colors-solarized ~/.vim/bundle/vim-colors-solarized
 
  git clone https://github.com/sellout/emacs-color-theme-solarized.git ~/.emacs.d/emacs-color-theme-solarized
+
+ echo ""
+ echo "[info] : Installing dotfiles to $HOME seems successful."
+ echo ""
+
 }
 
 configureGitDiff(){
+
+ echo ""
+ echo "[info] : Installing .git config."
+ echo ""
+
  #sudo touch /usr/local/bin/git_diff_wrapper
  sudo tee -a /usr/local/bin/git_diff_wrapper  >/dev/null << 'EOF'
 				#!/bin/sh
@@ -66,7 +81,16 @@ EOF
 }
 
 installVundleDeps(){
+ echo ""
+ echo "[info] : Installing dotfiles vundle deps."
+ echo ""
+
   vim +BundleInstall +qall
+
+ echo ""
+ echo "[info] : Installing dotfiles vundle deps seems successful."
+ echo ""
+
 }
 
 installEmacs(){
