@@ -61,6 +61,12 @@ installVundleDeps(){
   vim +BundleInstall +qall
 }
 
+installEmacs(){
+        sudo add-apt-repository ppa:cassou/emacs
+	sudo apt-get update
+	sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
+}
+
 init(){
  backupDotfiles
  installDotfiles
@@ -68,7 +74,9 @@ init(){
  configureGitDiff
  installVundleDeps
  gconftool --type string --set /desktop/gnome/background/primary_color "#002b36"
- sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
+
+ installEmacs
+
  sudo apt-get install tmux
  echo "####################################################"
  echo "###### [info] : dotfiles installed \,,/ ############"
