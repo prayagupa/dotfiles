@@ -1,5 +1,5 @@
 
-![programmer_mattress](https://github.com/iPrayag/dotfiles/programmer_setup/raw/master/programmer_mattress.png)
+![programmer_mattress](https://github.com/iPrayag/dotfiles/blob/master/programmer_mattress/programmer_mattress.jpg)
 
 provisioning tool
 ------------------------
