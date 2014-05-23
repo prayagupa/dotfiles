@@ -118,3 +118,10 @@ alias vBoxShownInfo='VBoxManage showvminfo'
 alias vBoxShowHDDs='VBoxManage list hdds'
 # @see : https://groups.google.com/forum/#!topic/pallet-clj/NA6yTHq7LN4
 alias vBoxBridgeDifs='VBoxManage list bridgedifs | grep ^Name'
+
+#@see : http://prayag-waves.blogspot.com/2013/10/linux-hacks-part-2.html
+alias findFile='find . -name'
+alias grepInFiles='grep -r'
+
+#nodejs
+alias npmLs='npm ls'

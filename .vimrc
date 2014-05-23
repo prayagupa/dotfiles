@@ -19,10 +19,17 @@ endif
 " 
 "set list
 
-" ======================================NERDTree================
-map <C-n> :NERDTreeToggle<CR>
+" ==============================================================
+" =====================     NERDTree   =========================
+" ==============================================================
+"  @see :
+"  http://www.objectpartners.com/2012/02/21/using-vim-as-your-grails-ide-part-1-navigating-your-project/
+map <C-n> :NERDTreeToggle<CR>     " Toggle file browser
 " autocmd vimenter * NERDTree
 " autocmd vimenter * if !argc() | NERDTree | endif
+map <C-f> <Esc>:NERDTreeFind<CR> "Find the current file in the file browser
+
+
 
 " =====================================================
 " ========== COLORSCHEME ==============================
@@ -60,7 +67,7 @@ Bundle 'phleet/vim-mercenary'
 Bundle 'bling/vim-airline'
 
 " ===============================================================
-" =========== snipmate ==========================================
+" ================= snipmate plus ===============================
 " ===============================================================
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
@@ -72,6 +79,10 @@ Bundle "garbas/vim-snipmate"
 Bundle "Valloric/YouCompleteMe"
 "Bundle "Shougo/neocomplete.vim"
 Bundle "scrooloose/nerdtree"
+" Run interactive commands inside a Vim buffer
+Bundle "rosenfeld/conque-term" 
+" TODO setup easymotion shortcuts
+Bundle 'Lokaltog/vim-easymotion'
 " ===============================================================
 
 
@@ -84,6 +95,7 @@ Bundle 'airblade/vim-gitgutter'
 " ===============================================================
 " =============== clj      ======================================
 " ===============================================================
+" https://github.com/guns is SOAB
 Bundle 'vim-scripts/VimClojure'
 
 
@@ -102,8 +114,19 @@ Bundle 'Shadowfiend/liftweb-vim'
 " ========================================================
 " ============ groovy/grails =============================
 " ========================================================
+
+" Run grails console, unit/integration tests, and shell inside vim
+" eg. :GrailsRunCurrentTest
 Bundle "hoffoo/vim-grails-console"
 Bundle "NathanNeff/grails-vim"
+
+
+" ========================================================
+" ====================  js ===============================
+" ========================================================
+Bundle "mklabs/grunt.vim"
+Bundle "moll/vim-node"
+Bundle "guileen/vim-node-dict"
 
 " ========================================================
 " =================== ANDROID ============================
@@ -111,6 +134,7 @@ Bundle 'bpowell/vim-android'
 "Bundle 'hsanson/vim-android' " :help vim-android-commands
 Bundle 'jalcine/android.vim'
 " ========================================================
+
 
 " 'vim-mercenary'
 " mysql vim mode - https://github.com/iPrayag/vim-mysql-mode

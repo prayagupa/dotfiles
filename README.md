@@ -9,7 +9,7 @@ install
 ```
 $ git clone https://github.com/iPrayag/dotfiles
 $ cd dotfiles
-$ ./dotfiles_bootstrap.sh
+$ ./bootstrap.sh
 ```
 
 what terminal looks like
