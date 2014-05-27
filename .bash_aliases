@@ -7,6 +7,8 @@
 alias gs='git status'
 alias ga='git add'
 alias gaUndo='git reset' #gaUndo [file]
+alias gResetLocalChangesMaster='git reset --hard origin/master'
+alias gResetLocalChangesDevelop='git reset --hard origin/develop'
 alias gCommit='git commit'
 alias gClone='git clone'
 
@@ -15,6 +17,7 @@ alias gStash='git stash'
 ##git stash show in diff style
 alias gStashShow='git stash show -p'
 alias gStashPop='git stash pop'
+alias gStashDrop='git stash drop'
 
 #incoming stat
 alias gIncomingMasterStat='git fetch && git log ..origin/master --stat'
@@ -22,6 +25,9 @@ alias gIncomingDevelopStat='git fetch && git log ..origin/develop --stat'
 
 alias gOutgoingDevelopStat='git fetch && git log origin/develop.. --stat'
 alias gOutgoingMasterStat='git log --pretty=oneline --abbrev-commit --graph @{u}.. --stat'
+
+alias gWhatChangedMasterStat='git whatchanged origin/master.. --stat'
+alias gWhatChangedDevelopStat='git whatchanged origin/develop.. --stat'
 
 #incoming patch
 alias gIncomingMasterPatch='git fetch && git log ..origin/master --patch'
