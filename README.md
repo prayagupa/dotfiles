@@ -1,5 +1,7 @@
-prayagupd's dotfiles
+prayagupd's yadr
 ------------------------
+make your terminal sing
+
 
 install
 ----------------------------
@@ -7,7 +9,7 @@ install
 ```
 $ git clone https://github.com/iPrayag/dotfiles
 $ cd dotfiles
-$ ./dotfiles_bootstrap.sh
+$ ./bootstrap.sh
 ```
 
 what terminal looks like
@@ -20,3 +22,5 @@ inspiration
 repeating the same shit for 4 years
 
 [VIM configuration for happy Java coding](http://www.lucianofiandesio.com/vim-configuration-for-happy-java-coding)
+
+[the cleanest vimrc you've ever seen](https://github.com/skwp/dotfiles)

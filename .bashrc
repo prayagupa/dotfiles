@@ -116,9 +116,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-##programmer setup
+##programmer mattress
 
-for util in ~/programmer_setup/{os_bootstrap.sh,programmer_bootstrap.sh,utilities.sh}; do
+for util in ~/programmer_mattress/{os_bootstrap.sh,programmer_bootstrap.sh,utilities.sh}; do
 	[ -r "$util" ] && [ -f "$util" ] && source "$util"
 done
 unset util

@@ -1,7 +1,15 @@
 ##for 64 bit
 
-#DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
-DEFAULT_SOURCE_ROOT="~/backup/JVM"
+#TODO crate architecture
+#eg. jvm_crate.sh
+#    bigdata_crate.sh
+#    js_crate.sh
+#    util.sh
+# source each crate in programmer_setup.sh
+#
+
+DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
+#DEFAULT_SOURCE_ROOT="$HOME/backup/JVM"
 DEFAULT_SOURCE_ROOT_JVM="/packup/repo.softwares/JVM"
 DEFAULT_INSTALLATION_DEST="/usr/local/"
 
@@ -10,11 +18,33 @@ DEFAULT_INSTALLATION_DEST="/usr/local/"
 #########################################################################
 
 reloadProfileConf(){
- source ~/.bash_profile
+   echo ""
+   echo "[info] : reloading $HOME/.bash_profile."	
+   echo ""
+   source ~/.bash_profile
 }
 
 unzipIt(){
-	sudo unzip $1 -d $DEFAULT_INSTALLATION_DEST
+   echo ""
+   echo "[info] : unzipping $1 to $DEFAULT_INSTALLATION_DEST."
+   echo ""
+   sudo unzip $1 -d $DEFAULT_INSTALLATION_DEST
+}
+
+gunzipIt(){
+   echo ""
+   echo "[info] : gunzipping $1 to $DEFAULT_INSTALLATION_DEST."
+   echo ""
+
+   sudo tar xjf $1  -C $DEFAULT_INSTALLATION_DEST
+}
+
+tarIt(){
+   echo ""
+   echo "[info] : tarring $1 to $DEFAULT_INSTALLATION_DEST."
+   echo ""
+
+   sudo tar -zxvf $1  -C $DEFAULT_INSTALLATION_DEST
 }
 
 setPermissionRWE(){
@@ -294,7 +324,7 @@ configureSSH(){
 
 installElasticsearch(){
 				VERSION_ES="1.1.0"
-				ES_HOME=$DEFAULT_INSTLLATION_DEST/elasticsearch-$ES_VERSION
+				ES_HOME=$DEFAULT_INSTALLATION_DEST/elasticsearch-$ES_VERSION
 				sudo tar -zxvf $DEFAULT_SOURCE_ROOT_JVM/SolrLuceneES-BigData/elasticsearch-$VERSION_ES.tar.gz -C $DEFAULT_INSTALLATION_DEST
 				sudo chmod -R ugo+rw $ES_HOME
           	                $ES_HOME/bin/plugin -i elasticsearch/marvel/latest
@@ -374,9 +404,6 @@ installElanceTracker(){
 }
 
 
-tarIt(){
-   sudo tar -zxvf $1  -C $DEFAULT_INSTALLATION_DEST
-}
 
 ## http://www.mongodb.org/downloads
 ## http://prayag-waves.blogspot.com/2012/11/hacking-on-grails-and-mongodb.html
@@ -476,7 +503,7 @@ installRabbitMQ(){
 	RABBIT_DEST="rabbitmq_server-3.2.4"
         #wgetIt $RABBIT_URL && tarIt $RABBIT_PATH
 	tarIt $RABBIT_PATH
-	setPermissionRWE $DEFAULT_DEFAULT_DESTINATION/$RABBIT_DEST
+	setPermissionRWE $DEFAULT_INSTALLATION_DEST/$RABBIT_DEST
 cat >> ~/.bash_profile <<'EOF'
   ###############################
   ########### NEO4J ###########
@@ -500,19 +527,56 @@ installHadoop(){
 	HADOOP_DEST="hadoop-$HADOOP_VERSION"
         #wgetIt $HADOOP_URL
 	tarIt $HADOOP_PATH
-	setPermissionRWE $DEFAULT_DEFAULT_DESTINATION/$HADOOP_DEST
+	setPermissionRWE $DEFAULT_INSTALLATION_DEST/$HADOOP_DEST
 cat >> ~/.bash_profile <<'EOF'
   ###############################
   ########### HADOOP ############
   ###############################
-  RABBIT_HOME=/usr/local/hadoop-2.2.0
+  HADOOP_HOME=/usr/local/hadoop-2.2.0
   export HADOOP_HOME
   export PATH=$PATH:$HADOOP_HOME/bin
 EOF
 
  reloadProfileConf
  
+}
 
+installNodeJS(){
+	#NODEJS_VERSION="0.8.1"
+	NODEJS_VERSION="0.10.28"
+	NODEJS_TOOL="node-v0.10.28-linux-x64.tar.gz"
+	#NODEJS_TOOL="node-v$NODEJS_VERSION.tar.gz"
+	NODEJS_URL="http://nodejs.org/dist/v$NODEJS_VERSION/$NODEJS_TOOL"
+	#wgetIt $NODEJS_URL
+	NODEJS_PATH=$DEFAULT_SOURCE_ROOT/$NODEJS_TOOL
+	NODEJS_DEST="$DEFAULT_INSTALLATION_DEST/node-v$NODEJS_VERSION-linux-x64"
+	tarIt $NODEJS_PATH
+        setPermissionRWE $NODEJS_DEST
+cat >> ~/.bash_profile <<'EOF'
+  ###############################
+  ########### NODE ############
+  ###############################
+  NODE_HOME=/usr/local/node-v0.10.28-linux-x64
+  export NODE_HOME
+  export PATH=$PATH:$NODE_HOME/bin
+EOF
+
+ reloadProfileConf
+
+}
+
+installPhantomJS(){
+	PHANTOM_VERSION="1.9.7"
+	PHANTOM_TOOL="phantomjs-$PHANTOM_VERSION-linux-x86_64.tar.bz2"
+	PHANTOM_URL="https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_TOOL"
+	if [ ! -e $DEFAULT_SOURCE_ROOT/$PHANTOM_TOOL ]; then
+                wgetIt $PHANTOM_URL
+        else
+                echo "[info] : $DEFAULT_SOURCE_ROOT/$PHANTOM_TOOL exists"
+        fi
+	gunzipIt $DEFAULT_SOURCE_ROOT/$PHANTOM_TOOL
+	sudo ln -s /usr/local/phantomjs-$PHANTOM_VERSION-linux-x86_64 /usr/local/phantomjs
+	sudo ln -s /usr/local/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
 }
 
 installEmacs(){
@@ -538,7 +602,7 @@ installVBox(){
 	if [ ! -e $VBox_TOOL_DEB ]; then
 	   wgetIt $VBox_URL
         else
-           echo "$DEFAULT_SOURCE_ROOT/$VBox_TOOL_DEB exists"
+           echo "[info] : $DEFAULT_SOURCE_ROOT/$VBox_TOOL_DEB exists"
         fi
         dpkgInstall "$DEFAULT_SOURCE_ROOT/$VBox_TOOL_DEB"
 }
