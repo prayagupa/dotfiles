@@ -28,7 +28,8 @@ map <C-n> :NERDTreeToggle<CR>     " Toggle file browser
 " autocmd vimenter * NERDTree
 " autocmd vimenter * if !argc() | NERDTree | endif
 map <C-f> <Esc>:NERDTreeFind<CR> "Find the current file in the file browser
-
+" r - refresh
+" C-minus/C-S-plus - to zoom out/in font
 
 
 " =====================================================
@@ -50,6 +51,7 @@ call vundle#rc()
 
 " ==============================================================
 " =========================pathogen=============================
+" ==============================================================
 execute pathogen#infect()
 
 syntax enable
