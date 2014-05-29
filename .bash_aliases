@@ -10,7 +10,9 @@ alias gaUndo='git reset' #gaUndo [file]
 alias gResetLocalChangesMaster='git reset --hard origin/master'
 alias gResetLocalChangesDevelop='git reset --hard origin/develop'
 alias gCommit='git commit'
+alias gCommitAfterMergeWithNoFiles='git commit'
 alias gClone='git clone'
+alias gBranchName='git rev-parse --symbolic-full-name --abbrev-ref HEAD'
 
 ##stash'ing
 alias gStash='git stash'
@@ -41,6 +43,8 @@ alias gPushDevelop='git push origin develop -v'
 
 alias gPullMaster='git pull origin master -v'
 alias gPullDevelop='git pull origin develop -v'
+
+alias gPullCurrentBranch='git pull origin "$(git rev-parse --symbolic-full-name HEAD)" -v'
 alias gPullAllBranches='git pull'
 
 alias gDiff='git diff --word-diff="color"'
@@ -57,6 +61,9 @@ alias gDeleteLocalBranch='git branch -d'    #usage gDeleteLocalBranch branchName
 alias gDeleteRemoteBranch='git push origin --delete'  #usage gDeleteRemoteBranch cashless-spring-security 
 alias gRemoteUpdate='git remote update'
 alias gMergeBranch='git merge' #eg. staying on main branch(say develop), gMergeBranch origin/cashless-spring-security
+alias gMergeBranchWithLatestChanges='git pull && git merge' #eg. staying on main branch(say develop), gMergeBranch origin/cashless-spring-security
+
+alias gConflictedFiles='git diff --name-only --diff-filter=U'
 
 #@see : http://stackoverflow.com/a/5188364/432903
 alias gBranchesCommiterDateMessages='git branch -vv'
