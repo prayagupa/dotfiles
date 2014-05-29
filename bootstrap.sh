@@ -149,9 +149,17 @@ update(){
   mv ~/.vimrc $HOME/dotfiles_backup_u
   mv ~/.bash_aliases $HOME/dotfiles_backup_u
   cp .vimrc ~/
+  cp .bash_prompt ~/
+  cp .bashrc ~/
   cp .bash_aliases ~/
   installVundleDeps
-
+  
+#  wget http://www.cmake.org/files/v2.8/cmake-2.8.11.tar.gz
+#  md5sum cmake-2.8.11.tar.gz 
+#  tar -xzvf cmake-2.8.11.tar.gz
+#  cd cmake-2.8.11
+#  ./bootstrap --prefix=/usr --system-libs --mandir=/share/man --docdir=/share/doc/cmake-2.8.11
+  source ~/.bashrc
   echo ""
   echo "#########################################################"
   echo "################## dotfiles UPDATED #####################"
