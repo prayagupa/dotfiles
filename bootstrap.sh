@@ -112,12 +112,23 @@ installVIm(){
 
 installXLibs(){
 	sudo apt-get install lua5.1
-	#for YouCompleteMe vim plugin
-	# https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64-super-quick-installation
-	sudo apt-get install build-essential cmake
-	sudo apt-get install python-dev
-	#cd ~/.vim/bundle/YouCompleteMe/
-	#./install.sh
+}
+
+installCmake(){
+
+  #wget http://www.cmake.org/files/v2.8/cmake-2.8.11.tar.gz
+  #md5sum cmake-2.8.11.tar.gz 
+  #tar -xzvf cmake-2.8.11.tar.gz
+  #cd cmake-2.8.11
+  #./bootstrap --prefix=/usr --system-libs --mandir=/share/man --docdir=/share/doc/cmake-2.8.11
+
+   #for YouCompleteMe vim plugin
+   # https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64-super-quick-installation
+   sudo apt-get install build-essential cmake
+   sudo apt-get install python-dev
+   cd ~/.vim/bundle/YouCompleteMe/
+   ./install.sh
+   cd
 }
 
 init(){
@@ -128,6 +139,7 @@ init(){
  installVIm
  installXLibs
  installVundleDeps
+ installCmake
  gconftool --type string --set /desktop/gnome/background/primary_color "#002b36"
 
  installEmacs
@@ -139,6 +151,7 @@ init(){
  echo "####################################################"
 }
 
+
 update(){
   echo ""
   echo "#########################################################"
@@ -148,17 +161,15 @@ update(){
   mkdir $HOME/dotfiles_backup_u
   mv ~/.vimrc $HOME/dotfiles_backup_u
   mv ~/.bash_aliases $HOME/dotfiles_backup_u
+  mv ~/.bashrc $HOME/dotfiles_backup_u
   cp .vimrc ~/
   cp .bash_prompt ~/
   cp .bashrc ~/
   cp .bash_aliases ~/
+  installXLibs
+  installVIm
   installVundleDeps
-  
-#  wget http://www.cmake.org/files/v2.8/cmake-2.8.11.tar.gz
-#  md5sum cmake-2.8.11.tar.gz 
-#  tar -xzvf cmake-2.8.11.tar.gz
-#  cd cmake-2.8.11
-#  ./bootstrap --prefix=/usr --system-libs --mandir=/share/man --docdir=/share/doc/cmake-2.8.11
+  installCmake
   source ~/.bashrc
   echo ""
   echo "#########################################################"
