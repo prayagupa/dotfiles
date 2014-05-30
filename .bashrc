@@ -153,3 +153,12 @@ function git_diff() {
 #. ~/.tmux-git/tmux-git.sh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# show current directory with git branch name
+# eg. nepleaks:master
+#function title {
+#    echo -ne "\033]0;"$*"\007"
+#}
+
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}$(__git_ps1 :%s)\007"'
+
