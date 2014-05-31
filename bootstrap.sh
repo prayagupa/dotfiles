@@ -37,6 +37,7 @@ installDotfiles(){
  cp .gitconfig ~/
  cp .tmux.conf ~/
  cp .bash_aliases ~/
+ cp  constants.sh ~/ 
 
  cp -r .emacs.d ~/
 
@@ -154,9 +155,9 @@ init(){
 
 update(){
   echo ""
-  echo "#########################################################"
-  echo "################ Updating .bash_aliases, .vimrc  ########"
-  echo "#########################################################"
+  echo "##################   UPDATING ###########################"
+  echo "################## .bash_aliases, .vimrc  ###############"
+  echo "################## .bashrc #########################"
 
   mkdir $HOME/dotfiles_backup_u
   mv ~/.vimrc $HOME/dotfiles_backup_u

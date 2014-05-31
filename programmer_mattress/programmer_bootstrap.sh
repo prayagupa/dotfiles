@@ -1,243 +1,35 @@
+#!/bin/bash
+
 ##for 64 bit
 
-#TODO crate architecture
+#crate architecture
 #eg. jvm_crate.sh
 #    bigdata_crate.sh
 #    js_crate.sh
 #    util.sh
-# source each crate in programmer_setup.sh
+# source each crate in programmer_bootstrap.sh
 #
 
-DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
-#DEFAULT_SOURCE_ROOT="$HOME/backup/JVM"
-DEFAULT_SOURCE_ROOT_JVM="/packup/repo.softwares/JVM"
-DEFAULT_INSTALLATION_DEST="/usr/local/"
+#basePath="${PWD##*/}"
+#basePath=$(dirname $0)
+#basePath=$(dirname $0)
+#CUR_DIR="$PWD"
+#basePath="${CUR_DIR}/${0#*/}"
+#basePath=$(cd $(dirname "$0"); pwd)
+#app="programmer_mattress"
+app="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-#########################################################################
-##global functions
-#########################################################################
+source $app/utils.sh
+source $app/jvm_crate.sh
+source $app/js_crate.sh
+source $app/bigdata_crate.sh
 
-reloadProfileConf(){
-   echo ""
-   echo "[info] : reloading $HOME/.bash_profile."	
-   echo ""
-   source ~/.bash_profile
-}
-
-unzipIt(){
-   echo ""
-   echo "[info] : unzipping $1 to $DEFAULT_INSTALLATION_DEST."
-   echo ""
-   sudo unzip $1 -d $DEFAULT_INSTALLATION_DEST
-}
-
-gunzipIt(){
-   echo ""
-   echo "[info] : gunzipping $1 to $DEFAULT_INSTALLATION_DEST."
-   echo ""
-
-   sudo tar xjf $1  -C $DEFAULT_INSTALLATION_DEST
-}
-
-tarIt(){
-   echo ""
-   echo "[info] : tarring $1 to $DEFAULT_INSTALLATION_DEST."
-   echo ""
-
-   sudo tar -zxvf $1  -C $DEFAULT_INSTALLATION_DEST
-}
-
-setPermissionRWE(){
-				sudo chmod -R 777 $1
-
-}
-
-setPermission(){
-				sudo chmod -R ugo+rw $1
-}
-
-wgetIt(){
-   echo "[info] : wgetting $1 to $DEFAULT_SOURCE_ROOT."	
-   echo ""
-   wget $1 -P $DEFAULT_SOURCE_ROOT
-
-   echo ""
-   echo "[info] : wgetting $1 to $DEFAULT_SOURCE_ROOT finished."	
-   echo ""
-}
-
-showMessage(){
- echo "##################################################"
- echo "[info] : $1 $2 is installed successfully."
- echo "##################################################"
-}
-#########################################################################
+echo "path => $basePath"
 
 install32bitLibrary(){
   #echo "deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   sudo apt-get update
   sudo apt-get install ia32-libs
-}
-
-####################################################################
-################JDK#################################################
-####################################################################
-installJdk(){
- JDK_VERSION="1.7.0"
-
- # Testing java installation
- command -v java -version >/dev/null 2>&1
- INSTALLED=$?
- echo ""
-
- # Checking java if installed
- if [ -n "$INSTALLED" ] ; then
-    JDK_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz"
-    JDK_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT/JVM/JDK/JDK1.7.0/jdk$JDK_VERSION"
-
-    sudo mv $JDK_LOCATION_SOURCE  $DEFAULT_INSTALLATION_DEST
-    sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/jdk1.7.0/
-
- cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### JDK ###############
-  ###############################
-  JAVA_HOME=/usr/local/jdk1.7.0
-  export JAVA_HOME
-  export PATH=$PATH:$JAVA_HOME/bin
-EOF
-
-   source ~/.bash_profile
-
-   echo "####################################################"
-   echo "[info] : jdk $JDK_VERSION is installed successfully."
-   echo "####################################################"
- fi
-}
-
-installClj(){
-      curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > lein
-      sudo mv lein /usr/bin/
-      sudo chmod +x /usr/bin/lein 
-      #lein repl
-}
-
-installScala(){
- SCALA_VERSION="2.10.3"
- SCALA_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT/JVM/scala/scala$SCALA_VERSION.tgz"
- 
- sudo tar -zxvf $SCALA_LOCATION_SOURCE -C $DEFAULT_INSTALLATION_DEST
- sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/scala-$SCALA_VERSION
-
- cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### SCALA #############
-  ###############################
-  SCALA_HOME=/usr/local/scala-2.10.3
-  export SCALA_HOME
-  export PATH=$PATH:$SCALA_HOME/bin
-EOF
-
- reloadProfileConf
-
- echo "##################################################"
- echo "[info] : $SCALA_VERSION is installed successfully."
- echo "##################################################"
-
-}
-
-
-installPlayFramework(){
-				PLAY_VERSION="2.2.2"
-				PLAY_URL="http://downloads.typesafe.com/play/$PLAY_VERSION/play-$PLAY_VERSION.zip"
-				wget $PLAY_URL  -P $DEFAULT_SOURCE_ROOT_JVM/scala/
-				sudo unzip  $DEFAULT_SOURCE_ROOT_JVM/scala/play-$PLAY_VERSION -d $DEFAULT_INSTALLATION_DEST
-        setPermissionRWE $DEFAULT_INSTALLATION_DEST/play-$PLAY_VERSION
- cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### play #############
-  ###############################
-  PLAY_HOME=/usr/local/play-2.2.2
-  export PLAY_HOME
-  export PATH=$PATH:$PLAY_HOME/
-EOF
-
- reloadProfileConf
- showMessage "play" $PLAY_VERSION
-}
-
-installGrails(){
- GRAILS_TOOL="grails"
- GRAILS_VERSION="2.3.3"
- GRAILS_LOCATION_SOURCE="$DEFAULT_SOURCE_ROOT_JVM/GroovyOnGrails/$GRAILS_TOOL-$GRAILS_VERSION.zip"
- unzipIt $GRAILS_LOCATION_SOURCE
- setPermissionRWE $DEFAULT_INSTALLATION_DEST/$GRAILS_TOOL-$GRAILS_VERSION
-
-# cat >> ~/.bash_profile <<'EOF'
-#  ###############################
-#  ########### grails #############
-#  ###############################
-#  JAVA_HOME=/usr/local/grails-2.2.3
-#  export GRAILS_HOME
-#  export PATH=$PATH:$GRAILS_HOME/bin
-#EOF
-
- reloadProfileConf
- showMessage $TOOL $GRAILS_VERSION
-}
-
-installIntelliJ(){
-
-  SOURCE_LOCATION="$DEFAULT_SOURCE_ROOT/JVM/IDEs/idea/ideaIU-13.tar.gz"
-  DEST_FOLDER="idea-IU-133.193"
-
-  sudo tar -zxvf $SOURCE_LOCATION -C $DEFAULT_INSTALLATION_DEST
-  sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$DEST_FOLDER
-  
-  echo " ####################################################################"
-  echo " [info] : Intellij is installed to $DEFAULT_INSTALLATION_DEST."
-  echo " ####################################################################"
-
-sudo tee -a $DEFAULT_INSTALLATION_DEST/$DEST_FOLDER/bin/studio64.vmoptions >/dev/null << 'EOF'
-	cat >> << 'EOF'
-	-Xms1024m
-	-Xmx1024m
-	-XX:MaxPermSize=1024m
-	-XX:ReservedCodeCacheSize=96m
-	-ea
-	-Dsun.io.useCanonCaches=false
-	-Djava.net.preferIPv4Stack=true
-	-XX:+UseCodeCacheFlushing
-	-XX:+UseConcMarkSweepGC
-	-XX:SoftRefLRUPolicyMSPerMB=50
-	-XX:+HeapDumpOnOutOfMemoryError
-	-Dawt.useSystemAAFontSettings=lcd
-EOF
-}
-
-#################################################################################################
-########################## ANDROID ##############################################################
-#################################################################################################
-androidInstall(){
-  ANDROID_STUDIO_LOCATION="$DEFAULT_SOURCE_ROOT/android-studio-prayag.zip"
-  sudo unzip $ANDROID_STUDIO_LOCATION -d $DEFAULT_INSTALLATION_DEST
-  sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/android-studio
-  echo "Android studio installed to /usr/local."
-cat >> /usr/local/android-studio/bin/studio64.vmoptions << 'EOF'
-	-Xms1024m
-	-Xmx1024m
-	-XX:MaxPermSize=1024m
-	-XX:ReservedCodeCacheSize=96m
-	-ea
-	-Dsun.io.useCanonCaches=false
-	-Djava.net.preferIPv4Stack=true
-	-XX:+UseCodeCacheFlushing
-	-XX:+UseConcMarkSweepGC
-	-XX:SoftRefLRUPolicyMSPerMB=50
-	-XX:+HeapDumpOnOutOfMemoryError
-	-Dawt.useSystemAAFontSettings=lcd
-EOF
-  #/usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &
 }
 
 
@@ -322,45 +114,9 @@ configureSSH(){
 }
 
 
-installElasticsearch(){
-				VERSION_ES="1.1.0"
-				ES_HOME=$DEFAULT_INSTALLATION_DEST/elasticsearch-$ES_VERSION
-				sudo tar -zxvf $DEFAULT_SOURCE_ROOT_JVM/SolrLuceneES-BigData/elasticsearch-$VERSION_ES.tar.gz -C $DEFAULT_INSTALLATION_DEST
-				sudo chmod -R ugo+rw $ES_HOME
-          	                $ES_HOME/bin/plugin -i elasticsearch/marvel/latest
-}
 
 installMysql(){
 				sudo apt-get install mysql-server
-}
-
-
-# https://github.com/nathanmarz/storm/wiki/Setting-up-development-environment
-
-installStorm(){
-	STORM_VERSION="0.8.2"
-	STORM_SOURCE="storm-$STORM_VERSION"
-        STORM_DOWNLOAD_URL="https://dl.dropboxusercontent.com/s/fl4kr7w0oc8ihdw/storm-0.8.2.zip?dl=1&token_hash=AAEAQiAKkgRc2Y2YI7zmIBOWe06neX5APneao4hUzO2bEQ"
-	#wgetIt $STORM_DOWNLOAD_URL
-	unzipIt "$DEFAULT_SOURCE_ROOT/JVM/SolrLuceneES-BigData/$STORM_SOURCE.zip"
-	sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$STORM_SOURCE
-
-cat >> ~/.bash_profile <<'EOF'
-  
-  ###############################
-  ########### STORM ###############
-  ###############################
-  STORM_HOME=/usr/local/storm-0.8.2
-  export STORM_HOME
-  export PATH=$PATH:$STORM_HOME/bin
-
-EOF
-
-   reloadProfileConf
-
-   echo "####################################################"
-   echo "[info] : storm $STORM_VERSION is installed successfully."
-   echo "####################################################"
 }
 
 
@@ -405,191 +161,11 @@ installElanceTracker(){
 
 
 
-## http://www.mongodb.org/downloads
-## http://prayag-waves.blogspot.com/2012/11/hacking-on-grails-and-mongodb.html
-## http://docs.mongodb.org/manual/tutorial/install-mongodb-on-linux/
-
-installMongodb(){
-   MONGO_VERSION="2.6.0"
-   MONGO_FILE="mongodb-linux-x86_64-$MONGO_VERSION.tgz"
-   #wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.0.tgz
-   tarIt $DEFAULT_SOURCE_ROOT/$MONGO_FILE
-cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### MONGO #############
-  ###############################
-  MONGODB_HOME=/usr/local/mongodb-linux-x86_64-2.6.0
-  export MONGODB_HOME
-  export PATH=$PATH:$MONGODB_HOME/bin
-EOF
-
-DB_PATH="/data/db"
-sudo mkdir -p $DB_PATH
-setPermission $DB_PATH
-
-   #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-   #echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-   #sudo apt-get update
-   #sudo apt-get install mongodb-org
-   #sudo apt-get install mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1 mongodb-org-tools=2.6.1
-}
-
-installDatomic(){
-	DATOMIC_VERSION="0.9.4724"
-	DATOMIC_FILE="datomic-free-$DATOMIC_VERSION"
-	DOWNLOAD_URL="https://my.datomic.com/downloads/free/$DATOMIC_VERSION"
-	#wget doesn't work
-	#wget $DOWNLOAD_URL -P $DEFAULT_SOURCE_ROOT
-	unzipIt $DEFAULT_SOURCE_ROOT/$DATOMIC_FILE.zip
-	setPermission $DEFAULT_INSTALLATION_DEST/$DATOMIC_FILE
-cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### DATOMIC ###########
-  ###############################
-  DATOMIC_HOME=/usr/local/datomic-free-0.9.4724
-  export DATOMIC_HOME
-  export PATH=$PATH:$DATOMIC_HOME/bin
-EOF
- reloadProfileConf
-}
-
 installErlang(){
     sudo apt-get update && sudo apt-get install erlang 
 }
 
-installNeo4j(){
-	NEO4J_VERSION="1.9.7"
-	NEO4J_FILE="neo4j-community-$NEO4J_VERSION"
-	NEO4J_FILE_TAR="$NEO4J_FILE-unix.tar.gz"
-	NEO4J_DOWNLOAD_URL_="http://dist.neo4j.org/neo4j-community-1.9.7-unix.tar.gz"
-	#wget $NEO4J_DOWNLOAD_URL -P $DEFAULT_SOURCE_ROOT
-	tarIt $DEFAULT_SOURCE_ROOT/$NEO4J_FILE_TAR
-	setPermission $DEFAULT_INSTALLATION_DEST/$NEO4J_FILE
-cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### NEO4J ###########
-  ###############################
-  NEO4J_HOME=/usr/local/neo4j-community-1.9.7
-  export NEO4J_HOME
-  export PATH=$PATH:$NEO4J_HOME/bin
-EOF
- reloadProfileConf
-}
 
-installCassandra(){
-	CASSANDRA_VERSION="2.0.7"
-	CASSANDRA_FILE="apache-cassandra-$CASSANDRA_VERSION"
-	CASSANDRA_FILE_TAR="$CASSANDRA_FILE-bin.tar.gz"
-	CASSANDRA_DOWNLOAD_URL="http://www.dsgnwrld.com/am/cassandra/$CASSANDRA_VERSION/$CASSANDRA_FILE_TAR"
-	#wgetIt $CASSANDRA_DOWNLOAD_URL ##comment it out to install from existing tar
-	tarIt $DEFAULT_SOURCE_ROOT/$CASSANDRA_FILE_TAR
-	setPermission $DEFAULT_INSTALLATION_DEST/$CASSANDRA_FILE
-cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### CASSANDRA #########
-  ###############################
-  CASSANDRA_HOME=/usr/local/apache-cassandra-2.0.7
-  export CASSANDRA_HOME
-  export PATH=$PATH:$CASSANDRA_HOME/bin
-EOF
- reloadProfileConf
-}
-
-installRabbitMQ(){
-	RABBIT_VERSION="3.2.4"
-	RABBIT_TOOL="rabbitmq-server-generic-unix-$RABBIT_VERSION.tar.gz"
-	RABBIT_PATH="$DEFAULT_SOURCE_ROOT/JVM/SolrLuceneES-BigData/$RABBIT_TOOL"
-	RABBIT_URL="http://www.rabbitmq.com/releases/rabbitmq-server/v3.2.4/$RABBIT_TOOL"
-	RABBIT_DEST="rabbitmq_server-3.2.4"
-        #wgetIt $RABBIT_URL && tarIt $RABBIT_PATH
-	tarIt $RABBIT_PATH
-	setPermissionRWE $DEFAULT_INSTALLATION_DEST/$RABBIT_DEST
-cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### NEO4J ###########
-  ###############################
-  RABBIT_HOME=/usr/local/rabbitmq_server-3.2.4
-  export RABBIT_HOME
-  export PATH=$PATH:$RABBIT_HOME/sbin
-EOF
-
- reloadProfileConf
- 
- installErlang
-}
-
-
-installHadoop(){
-	HADOOP_VERSION="2.2.0"
-	HADOOP_TOOL="hadoop-$HADOOP_VERSION.tar.gz"
-	HADOOP_PATH="$DEFAULT_SOURCE_ROOT/$HADOOP_TOOL"
-	HADOOP_URL="http://www.eng.lsu.edu/mirrors/apache/hadoop/common/hadoop-$HADOOP_VERSION/$HADOOP_TOOL"
-	HADOOP_DEST="hadoop-$HADOOP_VERSION"
-        #wgetIt $HADOOP_URL
-	tarIt $HADOOP_PATH
-	setPermissionRWE $DEFAULT_INSTALLATION_DEST/$HADOOP_DEST
-cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### HADOOP ############
-  ###############################
-  HADOOP_HOME=/usr/local/hadoop-2.2.0
-  export HADOOP_HOME
-  export PATH=$PATH:$HADOOP_HOME/bin
-EOF
-
- reloadProfileConf
- 
-}
-
-installNodeJS(){
-	#NODEJS_VERSION="0.8.1"
-	NODEJS_VERSION="0.10.28"
-	NODEJS_TOOL="node-v0.10.28-linux-x64.tar.gz"
-	#NODEJS_TOOL="node-v$NODEJS_VERSION.tar.gz"
-	NODEJS_URL="http://nodejs.org/dist/v$NODEJS_VERSION/$NODEJS_TOOL"
-	#wgetIt $NODEJS_URL
-	NODEJS_PATH=$DEFAULT_SOURCE_ROOT/$NODEJS_TOOL
-	NODEJS_DEST="$DEFAULT_INSTALLATION_DEST/node-v$NODEJS_VERSION-linux-x64"
-	tarIt $NODEJS_PATH
-        setPermissionRWE $NODEJS_DEST
-cat >> ~/.bash_profile <<'EOF'
-  ###############################
-  ########### NODE ############
-  ###############################
-  NODE_HOME=/usr/local/node-v0.10.28-linux-x64
-  export NODE_HOME
-  export PATH=$PATH:$NODE_HOME/bin
-EOF
-
- reloadProfileConf
-
-}
-
-installPhantomJS(){
-	PHANTOM_VERSION="1.9.7"
-	PHANTOM_TOOL="phantomjs-$PHANTOM_VERSION-linux-x86_64.tar.bz2"
-	PHANTOM_URL="https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_TOOL"
-	if [ ! -e $DEFAULT_SOURCE_ROOT/$PHANTOM_TOOL ]; then
-                wgetIt $PHANTOM_URL
-        else
-                echo "[info] : $DEFAULT_SOURCE_ROOT/$PHANTOM_TOOL exists"
-        fi
-	gunzipIt $DEFAULT_SOURCE_ROOT/$PHANTOM_TOOL
-	sudo ln -s /usr/local/phantomjs-$PHANTOM_VERSION-linux-x86_64 /usr/local/phantomjs
-	sudo ln -s /usr/local/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
-}
-
-installEmacs(){
-        sudo add-apt-repository ppa:cassou/emacs
-	sudo apt-get update
-	sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
-}
-
-installImmutant(){
-	immutant_version="1.1.1"
-	wget http://repository-projectodd.forge.cloudbees.com/release/org/immutant/immutant-dist/1.1.1/immutant-dist-$immutant_version-slim.zip -P ~/.lein
-
-}
 
 ##https://www.virtualbox.org/wiki/Linux_Downloads
 installVBox(){

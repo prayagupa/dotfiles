@@ -84,7 +84,7 @@ alias gRenameBranch="git branch -m"
 alias gRenameCurrentBranch="git branch -m"
 
 ##log
-alias glpd="git log --graph --all --decorate --pretty=format:'%Cred%h%Creset %ad %s (%an)' --date=short"
+alias glpd="git log --graph --all --decorate --pretty=format:'%Cred%h%Creset %Cgreen(%ad)%Creset %s %Cblue(%an)%Creset' --date=short"
 alias glpdr="git log --graph --pretty=format:'%Cred%h%Creset %an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 #@see:https://github.com/cypher/dotfiles/blob/master/gitconfig
 
