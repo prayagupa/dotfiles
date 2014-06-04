@@ -141,7 +141,8 @@ init(){
  installXLibs
  installVundleDeps
  installCmake
- gconftool --type string --set /desktop/gnome/background/primary_color "#002b36"
+ gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --type string "#002b36"
+ gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#FFFFFFFFDDDD"
 
  installEmacs
 
