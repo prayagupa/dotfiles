@@ -97,3 +97,21 @@ installRhythmboxGuitarPlugin(){
 powerConf(){
 	sudo apt-get install indicator-cpufreq
 }
+
+installNumix(){
+	sudo apt-get install gnome-tweak-tool
+
+	sudo add-apt-repository ppa:numix/ppa
+	echo ""
+	echo "##### added ppa:mumix ###########3"
+	echo ""
+
+        sudo apt-get update
+	sudo apt-get install numix-icon-theme-circle
+	#change icon theme
+	#http://itsfoss.com/how-to-install-themes-in-ubuntu-13-10/
+	#http://www.noobslab.com/2011/10/install-gnome-tweak-tool-in-ubuntu-1110.html
+
+	echo "starting gnome-tweak-too"
+	gnome-tweak-tool
+}
