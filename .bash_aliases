@@ -70,7 +70,10 @@ alias gConflictedFiles='git diff --name-only --diff-filter=U'
 alias gRemoteAddUpstream='git remote add upstream'
 
 #eg. staying on main branch(say develop), gMergeBranch origin/cashless-spring-security
-alias gMergeBranch='git merge' 
+alias gMergeChildBranch='git merge' 
+#eg. git rebase master, on origin/hulaki-infant
+#@see : http://stackoverflow.com/a/5340773/432903
+alias gRebaseFromParentBranch='git rebase' 
 
 #@see : http://stackoverflow.com/a/5188364/432903
 alias gBranchesCommiterDateMessages='git branch -vv'
