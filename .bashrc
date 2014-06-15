@@ -92,10 +92,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-########################################################################################################
-alias androidStudio='/usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &'
-########################################################################################################
-
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "google-chrome clementine Terminal" killall
 

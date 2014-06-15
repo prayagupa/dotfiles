@@ -117,7 +117,7 @@ alias goMakalu='cd $WORKSPACE/MakaluDevelop/DasTest && git status'
 alias letscode='cd $CODE_SPACE'
 alias letsmusic='cd $MUSIC_SPACE/METAL && ls -l'
 
-alias androidStudioStart='/usr/local/android-studio/bin/studio.sh > /usr/local/android-studio/studio.log &'
+alias androidStudioStart='/usr/local/android-studio/bin/studio.sh >' #/usr/local/android-studio/studio.log &'
 
 alias reboot='sudo reboot'
 alias enoughCoding='sudo shutdown -h now'
@@ -148,6 +148,8 @@ alias vBoxShowHDDs='VBoxManage list hdds'
 alias vBoxBridgeDifsName='VBoxManage list bridgedifs | grep ^Name'
 alias vBoxBridgeDifs='VBoxManage list bridgedifs'
 alias vBoxRunningVmIps="VBoxManage guestproperty enumerate {`VBoxManage list runningvms | awk -F'{' '{print $2}'` | grep IP | awk -F',' '{print $2}' | awk '{print $2}'"
+alias vBoxHostOnlyInterfaces='VBoxManage list hostonlyifs'
+alias vBoxDriverSetup='sudo /etc/init.d/vboxdrv setup' #when got host only interfaces error
 
 #@see : http://prayag-waves.blogspot.com/2013/10/linux-hacks-part-2.html
 alias findFile='find . -name'

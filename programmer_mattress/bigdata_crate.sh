@@ -7,12 +7,19 @@ installElasticsearch(){
 }
 
 
+## TODO zookeper
 # https://github.com/nathanmarz/storm/wiki/Setting-up-development-environment
 installStorm(){
 	STORM_VERSION="0.8.2"
 	STORM_SOURCE="storm-$STORM_VERSION"
-        STORM_DOWNLOAD_URL="https://dl.dropboxusercontent.com/s/fl4kr7w0oc8ihdw/storm-0.8.2.zip?dl=1&token_hash=AAEAQiAKkgRc2Y2YI7zmIBOWe06neX5APneao4hUzO2bEQ"
-	#wgetIt $STORM_DOWNLOAD_URL
+        STORM_DOWNLOAD_URL="https://dl.dropboxusercontent.com/s/fl4kr7w0oc8ihdw/storm-0.8.2.zip"
+	#https://dl.dropboxusercontent.com/s/tqdpoif32gufapo/storm-0.9.0.1.tar.gz
+	if [ ! -e $DEFAULT_SOURCE_ROOT/$STORM_SOURCE ]; then
+                wgetIt $STORM_DOWNLOAD_URL
+        else
+                echo "[info] : $DEFAULT_SOURCE_ROOT/$STORM_HOME already exists"
+        fi
+
 	unzipIt "$DEFAULT_SOURCE_ROOT/JVM/SolrLuceneES-BigData/$STORM_SOURCE.zip"
 	sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$STORM_SOURCE
 
