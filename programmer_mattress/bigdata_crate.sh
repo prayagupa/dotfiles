@@ -27,7 +27,7 @@ installZook(){
 
 	tarIt "$DEFAULT_SOURCE_ROOT/$ZOOK_TOOL.tar.gz"
 	sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$ZOOK_TOOL
-
+        cp $DEFAULT_INSTALLATION_DEST/$ZOOK_TOOL/conf/zoo_sample.cfg $DEFAULT_INSTALLATION_DEST/$ZOOK_TOOL/conf/zoo.cfg 
 cat >> ~/.bash_profile <<'EOF'
   
   ###############################
