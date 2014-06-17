@@ -10,13 +10,6 @@
 # source each crate in programmer_bootstrap.sh
 #
 
-#basePath="${PWD##*/}"
-#basePath=$(dirname $0)
-#basePath=$(dirname $0)
-#CUR_DIR="$PWD"
-#basePath="${CUR_DIR}/${0#*/}"
-#basePath=$(cd $(dirname "$0"); pwd)
-#app="programmer_mattress"
 app="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $app/utils.sh
@@ -25,7 +18,7 @@ source $app/js_crate.sh
 source $app/bigdata_crate.sh
 source $app/go_crate.sh
 
-echo "path => $basePath"
+#echo "base path => $app"
 
 install32bitLibrary(){
   #echo "deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list

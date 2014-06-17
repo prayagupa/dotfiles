@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
-#DEFAULT_SOURCE_ROOT="$HOME/backup/JVM"
+#DEFAULT_SOURCE_ROOT="/packup/repo.softwares"
+DEFAULT_SOURCE_ROOT="$HOME/backup/JVM"
 DEFAULT_SOURCE_ROOT_JVM="/packup/repo.softwares/JVM"
 DEFAULT_INSTALLATION_DEST="/usr/local/"
 

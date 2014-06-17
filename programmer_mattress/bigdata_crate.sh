@@ -7,17 +7,57 @@ installElasticsearch(){
 }
 
 
-## TODO zookeper
+##zookeper
+installZook(){
+	ZOOK_VERSION="3.4.5"
+	ZOOK_TOOL="zookeeper-${ZOOK_VERSION}"
+	ZOOK_DOWNLOAD_URL="http://www.us.apache.org/dist/zookeeper/${ZOOK_TOOL}/${ZOOK_TOOL}.tar.gz"
+	
+	if [ -e $DEFAULT_INSTALLATION_DEST/${ZOOK_TOOL} ]; then
+		echo "${ZOOK_TOOL} alreay installed";
+                exit ;
+	elif [ ! -e $DEFAULT_SOURCE_ROOT/${ZOOK_TOOL}.tar.gz ]; then
+                wgetIt $ZOOK_DOWNLOAD_URL
+        else
+                echo "[info] : $DEFAULT_SOURCE_ROOT/$ZOOK_TOOL already exists"
+        fi
+
+	sudo mkdir -p /var/lib/zookeeper
+	sudo mkdir -p /var/log/zookeeper
+
+	tarIt "$DEFAULT_SOURCE_ROOT/$ZOOK_TOOL.tar.gz"
+	sudo chmod 777 -R $DEFAULT_INSTALLATION_DEST/$ZOOK_TOOL
+
+cat >> ~/.bash_profile <<'EOF'
+  
+  ###############################
+  ########### ZOOK ###############
+  ###############################
+  ZOOK_HOME=/usr/local/zookeper-3.4.5
+  export ZOOK_HOME
+  export PATH=$PATH:$ZOOK_HOME/bin
+
+EOF
+
+   reloadProfileConf
+
+   echo "####################################################"
+   echo "[info] : ${ZOOK_TOOL} is installed successfully."
+   echo "####################################################"
+}
+
 # https://github.com/nathanmarz/storm/wiki/Setting-up-development-environment
 installStorm(){
+	#install zook
+	installZook
 	STORM_VERSION="0.8.2"
 	STORM_SOURCE="storm-$STORM_VERSION"
         STORM_DOWNLOAD_URL="https://dl.dropboxusercontent.com/s/fl4kr7w0oc8ihdw/storm-0.8.2.zip"
 	#https://dl.dropboxusercontent.com/s/tqdpoif32gufapo/storm-0.9.0.1.tar.gz
-	if [ ! -e $DEFAULT_SOURCE_ROOT/$STORM_SOURCE ]; then
+	if [ ! -e $DEFAULT_SOURCE_ROOT/${STORM_SOURCE}.zip ]; then
                 wgetIt $STORM_DOWNLOAD_URL
         else
-                echo "[info] : $DEFAULT_SOURCE_ROOT/$STORM_HOME already exists"
+                echo "[info] : $DEFAULT_SOURCE_ROOT/$STORM_SOURCE already exists"
         fi
 
 	unzipIt "$DEFAULT_SOURCE_ROOT/JVM/SolrLuceneES-BigData/$STORM_SOURCE.zip"

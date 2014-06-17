@@ -5,6 +5,9 @@
 ######################################                 #################################
 ########################################################################################
 alias gs='git status'
+#alias gsModified="git status -s | awk '{if ($1 == 'M') print $2}'"
+alias gsModified="git ls-files -m"
+
 alias ga='git add'
 alias gaUndo='git reset' #gaUndo [file]
 alias gResetLocalChangesMaster='git reset --hard origin/master'
@@ -49,6 +52,7 @@ alias gPullAllBranches='git pull'
 
 alias gDiff='git diff --word-diff="color"'
 alias gCheckout='git checkout'
+alias gCheckoutHEAD='git checkout HEAD^1'
 
 #branching
 alias gBranchesLocal='git branch'
@@ -163,3 +167,5 @@ alias ip="ifconfig eth0| grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'"
 alias sshVbox='ssh vmfest@192.168.56.104'
 
 alias publicSSHKey='cat ~/.ssh/id_rsa.pub'
+
+alias grailsSpockTest='grails test-app unit:spock'
