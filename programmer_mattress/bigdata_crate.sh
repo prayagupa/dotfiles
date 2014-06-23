@@ -1,3 +1,5 @@
+set -e
+
 installElasticsearch(){
 				VERSION_ES="1.1.0"
 				ES_HOME=$DEFAULT_INSTALLATION_DEST/elasticsearch-$ES_VERSION
@@ -15,7 +17,7 @@ installZook(){
 	
 	if [ -e $DEFAULT_INSTALLATION_DEST/${ZOOK_TOOL} ]; then
 		echo "${ZOOK_TOOL} alreay installed";
-                exit ;
+                return;
 	elif [ ! -e $DEFAULT_SOURCE_ROOT/${ZOOK_TOOL}.tar.gz ]; then
                 wgetIt $ZOOK_DOWNLOAD_URL
         else

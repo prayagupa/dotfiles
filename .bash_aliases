@@ -43,10 +43,10 @@ alias gShow='git show'
 
 alias gPushMaster='git push origin master -v'
 alias gPushDevelop='git push origin develop -v'
+alias gPushCurrentBranch='git push origin "$(git rev-parse --symbolic-full-name HEAD)" -v'
 
 alias gPullMaster='git pull origin master -v'
 alias gPullDevelop='git pull origin develop -v'
-
 alias gPullCurrentBranch='git pull origin "$(git rev-parse --symbolic-full-name HEAD)" -v'
 alias gPullAllBranches='git pull'
 

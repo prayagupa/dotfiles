@@ -69,6 +69,12 @@ EOF
  sudo chmod 777 /usr/local/bin/git_diff_wrapper
 }
 
+installRubyBlue(){
+     mkdir -p ~/.vim/colors
+     git clone https://github.com/jlong/rubyblue.git ~/.vim/colors
+     mv ~/.vim/colors/rubyblue.vim ~/.vim/colors
+}
+
 askForGitconfigUser(){
 
    echo -n "git username (eg. iPrayag): "
