@@ -73,6 +73,8 @@ installRubyBlue(){
      mkdir -p ~/.vim/colors
      git clone https://github.com/jlong/rubyblue.git ~/.vim/colors
      mv ~/.vim/colors/rubyblue.vim ~/.vim/colors
+     gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --type string "#112435"
+     gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#FFFFFF"
 }
 
 askForGitconfigUser(){
