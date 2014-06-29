@@ -17,7 +17,7 @@ installZook(){
 	
 	if [ -e $DEFAULT_INSTALLATION_DEST/${ZOOK_TOOL} ]; then
 		echo "${ZOOK_TOOL} alreay installed";
-                return;
+		##return;
 	elif [ ! -e $DEFAULT_SOURCE_ROOT/${ZOOK_TOOL}.tar.gz ]; then
                 wgetIt $ZOOK_DOWNLOAD_URL
         else

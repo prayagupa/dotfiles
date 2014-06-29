@@ -31,6 +31,7 @@ gunzipIt(){
    sudo tar xjf $1  -C $DEFAULT_INSTALLATION_DEST
 }
 
+## .tgz
 tarIt(){
    echo ""
    echo "[info] : tarring $1 to $DEFAULT_INSTALLATION_DEST."

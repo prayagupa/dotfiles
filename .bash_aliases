@@ -112,6 +112,9 @@ alias gApplyPatches='git apply --stat' #eg. gApplyPatch  gccount/patches/high_ri
 #########################     other personal aliases
 #########################
 ########################################################################################
+alias grailsSpockTest='grails test-app unit:spock'
+#nodejs
+alias npmLs='npm ls'
 
 alias lh='ls -lh'
 alias fileSpaceUsage='du --max-depth=1 -h'
@@ -128,6 +131,7 @@ alias enoughCoding='sudo shutdown -h now'
 ##while sleeping
 alias musicalSleep='sudo shutdown -h 60'
 alias soundcardCheck='sudo aplay -l'
+alias mouseRestart='sudo modprobe -r psmouse && sudo modprobe psmouse'
 
 alias findPort='sudo lsof -iTCP -sTCP:LISTEN | grep' #findPort amqp
 alias trash='sudo rm -rf ~/.local/share/Trash/*'
@@ -141,31 +145,27 @@ alias kernelBit='uname -m'
 
 alias checkProxy='env | grep -i proxy'
 
-#VBox
-# @see : http://forum.linuxcareer.com/threads/1782-Virtualbox-check-virtual-machine-status-from-command-line
-alias vBoxListVMs='VBoxManage list vms'
-alias vBoxRunningVMs='vboxmanage list runningvms'
-# @see : http://www.edwardstafford.com/2009/11/08/how-to-using-vboxmanage-to-delete-a-virtual-machine-from-virtualbox/
-alias vBoxShowVmInfo='VBoxManage showvminfo'
-alias vBoxShowHDDs='VBoxManage list hdds'
-# @see : https://groups.google.com/forum/#!topic/pallet-clj/NA6yTHq7LN4
-alias vBoxBridgeDifsName='VBoxManage list bridgedifs | grep ^Name'
-alias vBoxBridgeDifs='VBoxManage list bridgedifs'
-alias vBoxRunningVmIps="VBoxManage guestproperty enumerate {`VBoxManage list runningvms | awk -F'{' '{print $2}'` | grep IP | awk -F',' '{print $2}' | awk '{print $2}'"
-alias vBoxHostOnlyInterfaces='VBoxManage list hostonlyifs'
-alias vBoxDriverSetup='sudo /etc/init.d/vboxdrv setup' #when got host only interfaces error
+##VBox
+##enable me when required
+## @see : http://forum.linuxcareer.com/threads/1782-Virtualbox-check-virtual-machine-status-from-command-line
+#alias vBoxListVMs='VBoxManage list vms'
+#alias vBoxRunningVMs='vboxmanage list runningvms'
+## @see : http://www.edwardstafford.com/2009/11/08/how-to-using-vboxmanage-to-delete-a-virtual-machine-from-virtualbox/
+#alias vBoxShowVmInfo='VBoxManage showvminfo'
+#alias vBoxShowHDDs='VBoxManage list hdds'
+## @see : https://groups.google.com/forum/#!topic/pallet-clj/NA6yTHq7LN4
+#alias vBoxBridgeDifsName='VBoxManage list bridgedifs | grep ^Name'
+#alias vBoxBridgeDifs='VBoxManage list bridgedifs'
+#alias vBoxRunningVmIps="VBoxManage guestproperty enumerate {`VBoxManage list runningvms | awk -F'{' '{print $2}'` | grep IP | awk -F',' '{print $2}' | awk '{print $2}'"
+#alias vBoxHostOnlyInterfaces='VBoxManage list hostonlyifs'
+#alias vBoxDriverSetup='sudo /etc/init.d/vboxdrv setup' #when got host only interfaces error
 
 #@see : http://prayag-waves.blogspot.com/2013/10/linux-hacks-part-2.html
 alias findFile='find . -name'
 alias grepInFiles='grep -r'
-
-#nodejs
-alias npmLs='npm ls'
 
 alias ip="ifconfig eth0| grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'"
 
 alias sshVbox='ssh vmfest@192.168.56.104'
 
 alias publicSSHKey='cat ~/.ssh/id_rsa.pub'
-
-alias grailsSpockTest='grails test-app unit:spock'

@@ -38,6 +38,7 @@
 
 
 [alias]
+	s=status
         # Show table like compact log
 	l="!git log --graph --pretty='tformat:%C(yellow)%h{%C(green)%ar{%C(bold blue)%an{%C(red)%d%C(reset) %s' $* | column -t -s '{' | less -FXRS"
 	# log commits showing changed files
@@ -50,4 +51,13 @@
 	out = log --pretty=oneline --abbrev-commit --graph ..@{u}
 	in = !git fetch && git log --pretty=oneline --abbrev-commit --graph @{u}..
 	incoming=fetch && git log ..origin/develop --stat
+	#commiterStats=log --format="%cn" | sort | uniq -c
 	mycommits=log --author="PrayagUpd" --stat
+	############ cleaning ############################
+	cleanUntrackedAllCheck=clean -n -d
+	cleanUntrackedAll=clean -f -d
+	cleanUntrackedFiles=clean -n
+	cleanUntrackedFiles=clean -f
+
+        pushMaster=push origin master -v
+        pushDev=push origin develop -v
