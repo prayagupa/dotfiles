@@ -37,10 +37,9 @@ EOF
 }
 
 installClj(){
-      curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > lein
-      sudo mv lein /usr/bin/
-      sudo chmod +x /usr/bin/lein 
-      #lein repl
+      sudo wget -O /usr/local/bin/lein https://raw.github.com/technomancy/leiningen/stable/bin/lein      
+      sudo chmod +x /usr/local/bin/lein 
+      lein --version
 }
 
 installScala(){

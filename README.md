@@ -16,6 +16,15 @@ what terminal looks like
 ------------------------
 ![solarized dark](https://github.com/iPrayag/dotfiles/raw/master/dotfiles_prayag.png)
 
+Keep fork updates
+-------------------
+
+```bash
+git remote add upstream https://github.com/prayagupd/dotfiles
+git fetch upstream
+git checkout master
+git merge upstream/master
+```
 
 inspiration
 ----------------
