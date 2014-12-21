@@ -7,7 +7,7 @@ install
 ----------------------------
 
 ```
-$ git clone https://github.com/iPrayag/dotfiles
+$ git clone https://github.com/prayagupd/dotfiles
 $ cd dotfiles
 $ ./bootstrap.sh
 ```
@@ -28,7 +28,7 @@ git merge upstream/master
 
 inspiration
 ----------------
-repeating the same shit for 4 years
+repeating the same shit since 2010
 
 [VIM configuration for happy Java coding](http://www.lucianofiandesio.com/vim-configuration-for-happy-java-coding)
 
