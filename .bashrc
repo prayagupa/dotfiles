@@ -114,10 +114,13 @@ fi
 
 ##programmer mattress
 
-for util in ~/programmer_mattress/{os_bootstrap.sh,programmer_bootstrap.sh,utilities.sh}; do
-	[ -r "$util" ] && [ -f "$util" ] && source "$util"
-done
-unset util
+####################
+#######TODO ########
+####################
+#for util in ~/programmer_mattress/{os_bootstrap.sh,programmer_bootstrap.sh,utilities.sh}; do
+#	[ -r "$util" ] && [ -f "$util" ] && source "$util"
+#done
+#unset util
 
 for file in ~/.bash_prompt; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file"

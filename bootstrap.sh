@@ -43,7 +43,7 @@ installDotfiles(){
 
  cp -r .lein ~/
 
- cp -r programmer_mattress ~/
+ git clone https://github.com/prayagupd/programmer-mattress.git ~/
 
  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && git clone https://github.com/altercation/vim-colors-solarized ~/.vim/bundle/vim-colors-solarized
 
@@ -208,7 +208,7 @@ elif [ 'u' == $option ]
 then
         update
 else
-	echo "WTF !!! "
+	echo "!!! You are lost !!! You can choose i or u :) !!!"
 fi
 }
 
