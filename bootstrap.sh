@@ -18,15 +18,18 @@ backupDotfiles(){
  mv ~/.bash_profile "$backup"
  mv ~/.emacs.d "$backup"
 
- echo ""
+ echo "##########################################################################"
  echo "[info] : Backing up your dotfiles to $backup seems successful."
+ echo "##########################################################################"
  echo ""
 }
 
 installDotfiles(){
 
  echo ""
+ echo "##########################################################################"
  echo "[info] : Installing dotfiles to $HOME............."
+ echo "##########################################################################"
  echo ""
 
  cp -r .vim ~/
@@ -50,7 +53,9 @@ installDotfiles(){
  git clone https://github.com/sellout/emacs-color-theme-solarized.git ~/.emacs.d/emacs-color-theme-solarized
 
  echo ""
+ echo "##########################################################################"
  echo "[info] : Installing dotfiles to $HOME seems successful."
+ echo "##########################################################################"
  echo ""
 
 }
@@ -94,13 +99,17 @@ EOF
 
 installVundleDeps(){
  echo ""
+ echo "##########################################################################"
  echo "[info] : Installing dotfiles vundle deps."
+ echo "##########################################################################"
  echo ""
 
   vim +BundleInstall +qall
 
  echo ""
+ echo "##########################################################################"
  echo "[info] : Installing dotfiles vundle deps seems successful."
+ echo "##########################################################################"
  echo ""
 
 }
@@ -195,9 +204,9 @@ echo -n "#################### select options #################### "
 echo
 echo -n "######################################################## "
 echo
-echo -n "INSTALLATION  - i "
+echo -n "FIRST TIME INSTALLATION  - i "
 echo
-echo -n "UPDATE        - u (.vimrc, .bash_aliases)"
+echo -n "UPDATE THE DOTFILE       - u (.vimrc, .bash_aliases)"
 echo
 read option
 
